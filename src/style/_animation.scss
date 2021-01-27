@@ -1,0 +1,73 @@
+/* 路由前進時的入場/退場動畫 */
+$forwardTransitionTime: 500ms;
+
+.animation-forward-enter,
+.animation-forward-exit {
+  position: absolute !important;
+  top: 0;
+  width: 100%;
+}
+
+.animation-forward-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.animation-forward-enter-active {
+  opacity: 0.8;
+  transform: translateX(0);
+  transition: $forwardTransitionTime all;
+}
+
+.animation-forward-exit {
+  opacity: 0.8;
+  transform: translateX(0);
+}
+
+.animation-forward-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: $forwardTransitionTime all;
+}
+
+/* 增加/刪除清單時的入場/退場動畫 */
+$fadeTransitionTime: 500ms;
+
+.animation-fade-enter {
+  opacity: 0;
+}
+
+.animation-fade-enter-active {
+  opacity: 1;
+  transition: opacity $fadeTransitionTime ease-in;
+}
+
+.animation-fade-exit {
+  opacity: 1;
+}
+
+.animation-fade-exit-active {
+  opacity: 0;
+  transition: opacity $fadeTransitionTime ease-in;
+}
+
+/* 縮放時的入場/退場動畫 */
+$collapseTransitionTime: 300ms;
+
+.animation-collapse-enter {
+  transform: translateY(-40px);
+}
+
+.animation-collapse-enter-active {
+  transform: translateY(0%);
+  transition: all $collapseTransitionTime ease-in;
+}
+
+.animation-collapse-exit {
+  transform: translateY(0);
+}
+
+.animation-collapse-exit-active {
+  transform: translateY(-40px);
+  transition: all $collapseTransitionTime ease-in;
+}

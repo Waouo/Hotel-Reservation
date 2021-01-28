@@ -2,6 +2,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 const isDev = false
 
 module.exports = {
@@ -19,9 +20,19 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: { publicPath: '../' },
+            options: {
+              publicPath: '../',
+            },
           },
-          { loader: 'css-loader', options: { sourceMap: true } },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[local]__[hash:5]',
+              },
+              sourceMap: true,
+            },
+          },
           { loader: 'sass-loader', options: { sourceMap: true } },
         ],
       },
@@ -61,12 +72,12 @@ module.exports = {
       filename: 'index.html',
     }),
     new CleanWebpackPlugin(),
+    new Dotenv(),
   ],
   devServer: {
     port: 8000,
     open: false,
   },
-
   resolve: {
     extensions: ['.js', '.jsx', '.json', 'scss'],
   },

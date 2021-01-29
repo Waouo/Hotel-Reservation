@@ -1,22 +1,19 @@
-import { Container, Row, Col } from 'react-bootstrap'
-import OrderInfo from '../components/OrderInfo'
-import UserInfo from '../components/UserInfo'
+import { useEffect } from 'react'
+import styles from './index.module.scss'
+import Sidebar from './Sidebar'
+import Gallery from './Gallery'
 
-const HomeScreen = () => {
+const HomePage = () => {
+  useEffect(() => {})
+
   return (
-    <>
-      <Container style={{ margin: '0', maxWidth: '100%' }}>
-        <Row>
-          <Col sm={5} style={{ padding: '0' }}>
-            <OrderInfo />
-          </Col>
-          <Col sm={7} style={{ padding: '0' }}>
-            <UserInfo  />
-          </Col>
-        </Row>
-      </Container>
-    </>
+    <div className={styles.home}>
+      <div className={styles.home__container}>
+        <Sidebar />
+        <Gallery/>
+      </div>
+    </div>
   )
 }
 
-export default HomeScreen
+export default HomePage

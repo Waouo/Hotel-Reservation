@@ -1,0 +1,51 @@
+// HomePage
+.home {
+  width: 100%;
+  min-width: 576px;
+  min-height: 768px;
+  z-index: 0;
+  position: relative;
+  overflow-x: hidden;
+  background-color: #000000;
+  background-image: url(../../../public/images/house/photo-1523217582562-09d0def993a6.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+
+  @media (max-width: 630px) {
+    height: auto;
+    flex-direction: column;
+  }
+
+  &::after {
+    content: '';
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &__container {
+    width: 90%;
+    min-width: 360px;
+    height: auto;
+    min-height: 80vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    @media (max-width: 630px) {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+// Gallery
+.gallery {
+  width: 75%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  order: 2;
+
+  @media (max-width: 630px) {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  &__image {
+    width: 275px;
+    height: 275px;
+
+    @media (max-width: 840px) {
+      width: 200px;
+      height: 200px;
+    }
+  }
+}

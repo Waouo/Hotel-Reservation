@@ -1,0 +1,18 @@
+$forwardTransitionTime: 500ms;
+
+.forward-enter {
+  transform: translateX(100%);
+}
+
+.forward-enter-active {
+  transition: $forwardTransitionTime all  ease-in-out;
+}
+
+.forward-exit {
+  transform: translateX(0);
+}
+
+.forward-exit-active {
+  transform: translateX(-100%);
+  transition: $forwardTransitionTime all  ease-in-out;
+}

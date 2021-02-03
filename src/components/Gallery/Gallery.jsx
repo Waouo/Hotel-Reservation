@@ -1,7 +1,7 @@
 import { useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { RoomsContext } from '../../contexts'
-import styles from './Gallery.module.scss'
+import styles from './Gallery.scss'
 
 const Gallery = () => {
   const { rooms, success } = useContext(RoomsContext)

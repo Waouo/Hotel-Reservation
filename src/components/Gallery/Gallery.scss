@@ -39,18 +39,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.35s ease;
+  transition: all .4s ease;
 
   > span {
+    font: normal normal normal 19px/26px Open Sans;
+    letter-spacing: 0px;
+    color: white;
     opacity: 0;
+    transition: opacity .4s ease;
   }
 
   &:hover {
     background-color: rgba(56, 71, 11, 0.6);
     > span {
-      font: normal normal normal 19px/26px Open Sans;
-      letter-spacing: 0px;
-      color: white;
       opacity: 1;
     }
   }

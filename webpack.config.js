@@ -3,13 +3,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
-const isDev = false
+const isDev = true
 
 module.exports = {
   mode: 'development',
   entry: './src/index.js',
-  devtool: isDev ? false : 'source-map',
+  devtool: isDev ? 'source-map' : false,
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },

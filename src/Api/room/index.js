@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-const cors = 'https://cors-anywhere.herokuapp.com/'
 const URL = 'https://challenge.thef2e.com/api/thef2e2019/stage6'
 
 const roomRequest = axios.create({

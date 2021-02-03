@@ -1,10 +1,10 @@
-import styles from './Sidebar.module.scss'
+import styles from './Sidebar.scss'
 
 const Sidebar = () => {
   return (
     <header className={styles.sidebar}>
-      <picture className={styles.logo}>
-        <img src="../../../public/images/logo.3fafe707.svg" alt="hotel-log" />
+      <picture >
+        <img className={styles.logo} src="../../../public/images/logo.3fafe707.svg" alt="hotel-log" />
       </picture>
       <address className={styles.info}>
         <h1 className={styles.title}>好室旅店。HOUSE HOTEL</h1>

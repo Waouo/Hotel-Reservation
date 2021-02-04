@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
-import styles from './slideItems.scss'
+import styles from './SlideItems.scss'
+import classNames from 'classnames/bind'
+
+const cx = classNames.bind(styles)
 
 const SlideItems = ({ num, variable, setVariable }) => {
   const numArray = Array(num)
@@ -10,9 +13,9 @@ const SlideItems = ({ num, variable, setVariable }) => {
   useEffect(() => {})
 
   return (
-    <form className={styles.slideItems}>
+    <form className={cx('slideItems', 'light-green')}>
       {numArray.map((_, index) => (
-        <label key={index} htmlFor={index} className={styles.slideItems__label}>
+        <label key={index} htmlFor={index} className={cx('slideItems-label')}>
           <input
             type="radio"
             name="slideItem"
@@ -20,9 +23,9 @@ const SlideItems = ({ num, variable, setVariable }) => {
             value={index}
             onChange={(e) => setVariable(Number(e.currentTarget.value))}
             checked={variable === index}
-            className={styles.slideItems__input}
+            className={cx('slideItems-input')}
           />
-          <span className={styles.slideItems__control}></span>
+          <span className={cx('slideItems-control')}></span>
         </label>
       ))}
     </form>
@@ -33,7 +36,6 @@ SlideItems.propTypes = {
   num: PropTypes.number.isRequired,
   variable: PropTypes.number.isRequired,
   setVariable: PropTypes.func.isRequired,
-  className: PropTypes.object,
 }
 
 export default SlideItems

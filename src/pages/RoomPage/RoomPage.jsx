@@ -39,26 +39,26 @@ const RoomPage = ({ match }) => {
   return (
     <>
       {success ? (
-        <div className={styles.roomDetails}>
-          <section className={styles.panel}>
+        <div className={cx('roomDetails')}>
+          <section className={cx('panel')}>
             <TransitionGroup component={null}>
               <CSSTransition
                 classNames="animation-fade"
                 timeout={500}
                 key={bgNum}
               >
-                <img className={styles.bg} src={bgSrc} />
+                <img className={cx('bg')} src={bgSrc} />
               </CSSTransition>
             </TransitionGroup>
-            <Link to="/" className={styles.prePage}>
-              <span className={styles.arrow}> &lt; </span>查看其它房型
+            <Link to="/" className={cx('prePage')}>
+              <span className={cx('arrow')}> &lt; </span>查看其它房型
             </Link>
-            <div className={styles.booking}>
+            <div className={cx('booking')}>
               <div>
-                <h2 className={styles.booking__price}>
+                <h2 className={cx('booking-price')}>
                   <span>${room.normalDayPrice}</span>&nbsp; / &nbsp; 1晚
                 </h2>
-                <button className={styles.booking__button}>Booking now</button>
+                <button className={cx('booking-button')}>Booking now</button>
               </div>
               <SlideItems
                 num={3}
@@ -68,8 +68,8 @@ const RoomPage = ({ match }) => {
               />
             </div>
           </section>
-          <main className={styles.info}>
-            <div className={styles.info__container}></div>
+          <main className={cx('info')}>
+            <div className={cx('info-container')}></div>
           </main>
         </div>
       ) : (

@@ -1,41 +1,28 @@
 import { useEffect, useState } from 'react'
-import {
-  CSSTransition,
-  TransitionGroup,
-} from 'react-transition-group'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import styles from './Home.scss'
+import classNames from 'classnames/bind'
 import { SlideItemsContext } from '../../contexts'
 import bgImagesPath from './bgImagesPath'
 import Sidebar from '../../components/Sidebar'
 import Gallery from '../../components/Gallery'
 import Footer from '../../components/Footer'
 
+const cx = classNames.bind(styles)
+
 const HomePage = () => {
   const [bgNum, setBgNum] = useState(0)
-  const [homeStyle, setHomeStyle] = useState({
-    backgroundImage: `url(${bgImagesPath[bgNum]})`,
-  })
   let srcBg = bgImagesPath[bgNum]
 
-  useEffect(() => {
-    setHomeStyle({
-      backgroundImage: `url(${bgImagesPath[bgNum]})`,
-    })
-  }, [bgNum])
-
   return (
-    <div className={styles.home}>
+    <div className={cx('home')}>
       <TransitionGroup component={null}>
-        <CSSTransition
-          classNames="animation-fade"
-          timeout={500}
-          key={bgNum}
-        >
-            <img className={styles.bg} src={srcBg} />
+        <CSSTransition classNames="animation-fade" timeout={500} key={bgNum}>
+          <img className={cx('bg')} src={srcBg} />
         </CSSTransition>
       </TransitionGroup>
 
-      <div className={styles.home__container}>
+      <div className={cx('home-container')}>
         <Sidebar />
         <Gallery />
       </div>

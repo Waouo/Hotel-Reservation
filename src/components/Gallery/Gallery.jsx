@@ -2,6 +2,9 @@ import { useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { RoomsContext } from '../../contexts'
 import styles from './Gallery.scss'
+import classNames from 'classnames/bind'
+
+const cx = classNames.bind(styles)
 
 const Gallery = () => {
   const { rooms, success } = useContext(RoomsContext)
@@ -11,16 +14,16 @@ const Gallery = () => {
   })
 
   return (
-    <section className={styles.gallery}>
+    <section className={cx('gallery')}>
       {success ? (
         Array.from(rooms).map((room) => (
-          <Link key={room.id} to={`room/${room.id}`} className={styles.link}>
+          <Link key={room.id} to={`room/${room.id}`} className={cx('link')}>
             <img
               src={room.imageUrl}
               alt={room.name}
-              className={styles.gallery__image}
+              className={cx('gallery-image')}
             />
-            <span className={styles.hover}>
+            <span className={cx('hover')}>
               <span>{room.name}</span>
             </span>
           </Link>

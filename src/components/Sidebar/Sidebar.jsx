@@ -1,16 +1,23 @@
 import styles from './Sidebar.scss'
+import classNames from 'classnames/bind'
+
+const cx = classNames.bind(styles)
 
 const Sidebar = () => {
   return (
-    <header className={styles.sidebar}>
-      <picture >
-        <img className={styles.logo} src="../../../public/images/logo.3fafe707.svg" alt="hotel-log" />
+    <header className={cx('sidebar')}>
+      <picture>
+        <img
+          className={cx('logo')}
+          src="../../../public/images/logo.3fafe707.svg"
+          alt="hotel-log"
+        />
       </picture>
-      <address className={styles.info}>
-        <h1 className={styles.title}>好室旅店。HOUSE HOTEL</h1>
-        <p className={styles.address}>花蓮縣花蓮市國聯一路1號</p>
-        <p className={styles.phone}>03-8321155</p>
-        <p className={styles.email}>HOUSE@HOTEL.COM</p>
+      <address className={cx('info')}>
+        <h1 className={cx('title')}>好室旅店。HOUSE HOTEL</h1>
+        <p className={cx('address')}>花蓮縣花蓮市國聯一路1號</p>
+        <p className={cx('phone')}>03-8321155</p>
+        <p className={cx('email')}>HOUSE@HOTEL.COM</p>
       </address>
     </header>
   )

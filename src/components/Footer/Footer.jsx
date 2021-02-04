@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import SlideItems from '../SlideItems'
 import { SlideItemsContext } from '../../contexts'
-import styles from './Footer.module.scss'
+import styles from './Footer.scss'
 
 const Footer = () => {
   const { num, variable, setVariable } = useContext(

@@ -1,73 +1,75 @@
-/* 路由前進時的入場/退場動畫 */
-$forwardTransitionTime: 500ms;
+:global {
+  /* 路由前進時的入場/退場動畫 */
 
-.animation-forward-enter,
-.animation-forward-exit {
-  position: absolute !important;
-  top: 0;
-  width: 100%;
-}
+  $forwardTransitionTime: 500ms;
 
-.animation-forward-enter {
-  opacity: 0;
-  transform: translateX(100%);
-}
+  .animation-forward-enter {
+    opacity: 0;
+    transform: translateX(100%);
+  }
 
-.animation-forward-enter-active {
-  opacity: 0.8;
-  transform: translateX(0);
-  transition: $forwardTransitionTime all;
-}
+  .animation-forward-enter-active {
+    opacity: 0.8;
+    transform: translateX(0);
+    transition: $forwardTransitionTime all ease-in-out;
+  }
 
-.animation-forward-exit {
-  opacity: 0.8;
-  transform: translateX(0);
-}
+  .animation-forward-exit {
+    opacity: 0.8;
+    transform: translateX(0);
+  }
 
-.animation-forward-exit-active {
-  opacity: 0;
-  transform: translateX(-100%);
-  transition: $forwardTransitionTime all;
-}
+  .animation-forward-exit-active {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: $forwardTransitionTime all ease-in-out;
+  }
 
-/* 增加/刪除清單時的入場/退場動畫 */
-$fadeTransitionTime: 500ms;
+  /* 增加/刪除清單時的入場/退場動畫 */
+  $fadeTransitionTime: 500ms;
 
-.animation-fade-enter {
-  opacity: 0;
-}
+  .animation-fade{
+    &-enter, &-enter-active, &-exit, &-exit-active{
+      
+    }
+  }
 
-.animation-fade-enter-active {
-  opacity: 1;
-  transition: opacity $fadeTransitionTime ease-in;
-}
+  .animation-fade-enter {
+    opacity: 0;
+  }
 
-.animation-fade-exit {
-  opacity: 1;
-}
+  .animation-fade-enter-active {
+    opacity: 1;
+    transition: opacity $fadeTransitionTime linear;
+  }
+  
+  .animation-fade-exit {
+    opacity: 1;
+  }
 
-.animation-fade-exit-active {
-  opacity: 0;
-  transition: opacity $fadeTransitionTime ease-in;
-}
+  .animation-fade-exit-active {
+    opacity: 0;
+    transition: opacity $fadeTransitionTime linear;
+  }
 
-/* 縮放時的入場/退場動畫 */
-$collapseTransitionTime: 300ms;
+  /* 縮放時的入場/退場動畫 */
+  $collapseTransitionTime: 300ms;
 
-.animation-collapse-enter {
-  transform: translateY(-40px);
-}
+  .animation-collapse-enter {
+    transform: translateY(-40px);
+  }
 
-.animation-collapse-enter-active {
-  transform: translateY(0%);
-  transition: all $collapseTransitionTime ease-in;
-}
+  .animation-collapse-enter-active {
+    transform: translateY(0%);
+    transition: all $collapseTransitionTime ease-in;
+  }
 
-.animation-collapse-exit {
-  transform: translateY(0);
-}
+  .animation-collapse-exit {
+    transform: translateY(0);
+  }
 
-.animation-collapse-exit-active {
-  transform: translateY(-40px);
-  transition: all $collapseTransitionTime ease-in;
+  .animation-collapse-exit-active {
+    transform: translateY(-40px);
+    transition: all $collapseTransitionTime ease-in;
+  }
 }

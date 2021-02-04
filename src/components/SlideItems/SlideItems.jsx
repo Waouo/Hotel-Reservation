@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
-import styles from './SlideItems.module.scss'
+import styles from './slideItems.scss'
 
 const SlideItems = ({ num, variable, setVariable }) => {
   const numArray = Array(num)

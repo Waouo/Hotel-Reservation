@@ -5,7 +5,7 @@ import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-const SlideItems = ({ num, variable, setVariable }) => {
+const SlideItems = ({ num, variable, setVariable, color }) => {
   const numArray = Array(num)
     .fill()
     .map((_, index) => index)
@@ -13,7 +13,7 @@ const SlideItems = ({ num, variable, setVariable }) => {
   useEffect(() => {})
 
   return (
-    <form className={cx('slideItems', 'light-green')}>
+    <form className={cx('slideItems', color, { color: !!color })}>
       {numArray.map((_, index) => (
         <label key={index} htmlFor={index} className={cx('slideItems-label')}>
           <input
@@ -36,6 +36,7 @@ SlideItems.propTypes = {
   num: PropTypes.number.isRequired,
   variable: PropTypes.number.isRequired,
   setVariable: PropTypes.func.isRequired,
+  color: PropTypes.string,
 }
 
 export default SlideItems

@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import classNames from 'classnames/bind'
 import styles from './RoomPage.scss'
+import classNames from 'classnames/bind'
 import PropTypes from 'prop-types'
 import { getRoomDetailsApi } from '../../Api/room'
+import amenitiesCh from './amenities-Ch'
 import Loading from '../../components/Loading'
 import SlideItems from '../../components/SlideItems'
-import amenitiesCh from './amenities-Ch'
+import Calendar from '../../components/Calendar'
 
 const cx = classNames.bind(styles)
 
@@ -98,16 +99,14 @@ const RoomPage = ({ match }) => {
                       ok: room.amenities[amenity],
                     })}
                   >
-                    <img
-                      src={`../../.././public/images/${amenity}.svg`}
-                      //TODO className={cx( ,{room.amenities[amenity]})}
-                    />
+                    <img src={`../../.././public/images/${amenity}.svg`} />
                     <p>{amenitiesCh[amenity]}</p>
                   </div>
                 ))}
             </div>
             <div>
               <h2>空房間狀態查詢</h2>
+              <Calendar />
             </div>
           </div>
         </main>

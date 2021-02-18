@@ -5,24 +5,26 @@
   position: relative;
   display: flex;
   flex-wrap: nowrap;
-
-  h1,
-  h2 {
-    line-height: 20px;
-    font-weight: 500;
-  }
-
-  h1 {
-    text-align: right;
-  }
-
-  h2 {
-    margin-top: 28px;
-  }
+  justify-content: center;
+  align-items: center;
 
   @media (max-width: 576px) {
     flex-direction: column;
   }
+}
+
+.room-des,
+.room-status {
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.room-des {
+  text-align: right;
+}
+
+.room-status {
+  margin-top: 28px;
 }
 
 .panel {
@@ -156,47 +158,4 @@
   }
 }
 
-.amenities {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: start;
-}
 
-.amenity {
-  width: 64px;
-  height: 59px;
-  margin: 45px 36px 0 0;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  opacity: var(--opacity-ok, 0.5);
-
-  &::after {
-    content: '';
-    width: 15px;
-    height: 15px;
-    position: absolute;
-    left: 55px;
-    background: var(--background-ok, url('../../../public/images/cancel.svg'));
-  }
-
-  > img {
-    width: 40px;
-    height: 40px;
-  }
-
-  > p {
-    text-align: center;
-    font-size: 10px;
-    line-height: 15px;
-    font-weight: 400;
-  }
-}
-
-.ok {
-  --background-ok: url('../../../public/images/Ok.svg');
-  --opacity-ok: 1;
-}

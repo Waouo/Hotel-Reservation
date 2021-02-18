@@ -5,10 +5,9 @@ import styles from './RoomPage.scss'
 import classNames from 'classnames/bind'
 import PropTypes from 'prop-types'
 import { getRoomDetailsApi } from '../../Api/room'
-import amenitiesCh from './amenities-Ch'
-import Loading from '../../components/Loading'
 import SlideItems from '../../components/SlideItems'
-import Calendar from '../../components/Calendar'
+import Booking from '../../components/Booking'
+import Amenities from '../../components/Amenities'
 
 const cx = classNames.bind(styles)
 
@@ -18,11 +17,13 @@ const RoomPage = ({ match }) => {
   const [success, setSuccess] = useState(false)
   const [bgNum, setBgNum] = useState(0)
   const [bgSrc, setBgSrc] = useState('')
+  const [showBooking, setShowBooking] = useState(false)
 
   useEffect(() => {
-    ;(async function () {
+    (async function () {
       try {
         const { data } = await getRoomDetailsApi(match.params.id)
+        console.log(data.room[0])
         setRoom(data.room[0])
         setBooking(data.booking[0])
         setSuccess(data.success)
@@ -46,6 +47,20 @@ const RoomPage = ({ match }) => {
   return (
     <>
       <div className={cx('roomDetails')}>
+        <TransitionGroup component={null}>
+          <CSSTransition
+            classNames="animation-fade"
+            timeout={500}
+            key={showBooking}
+          >
+            <Booking
+              showBooking={showBooking}
+              setShowBooking={setShowBooking}
+              room={room}
+            />
+          </CSSTransition>
+        </TransitionGroup>
+
         <section className={cx('panel')}>
           <TransitionGroup component={null}>
             <CSSTransition
@@ -64,7 +79,12 @@ const RoomPage = ({ match }) => {
               <h2 className={cx('booking-price')}>
                 <span>${room.normalDayPrice}</span>&nbsp; / &nbsp; 1晚
               </h2>
-              <button className={cx('booking-button')}>Booking now</button>
+              <button
+                className={cx('booking-button')}
+                onClick={() => setShowBooking(true)}
+              >
+                Booking now
+              </button>
             </div>
             <SlideItems
               num={3}
@@ -76,11 +96,20 @@ const RoomPage = ({ match }) => {
         </section>
         <main className={cx('info')}>
           <div className={cx('info-container')}>
-            <h1>1人・ 單人床・ 附早餐・衛浴1間・18平方公尺</h1>
+            <h1 className={cx('room-des')}>
+              1人・ 單人床・ 附早餐・衛浴1間・18平方公尺
+            </h1>
             <ul className={cx('time')}>
-              <li>平日（一～四）價格：1380 / 假日（五〜日）價格：1500</li>
-              <li>入住時間：15：00（最早）/ 21：00（最晚）</li>
-              <li>退房時間：10：00</li>
+              <li>
+                平日（一～四）價格：${room.normalDayPrice} / 假日（五〜日）價格：
+                ${room.holidayPrice}
+              </li>
+              <li>
+                入住時間：
+                {room.checkInAndOut?.checkInEarly}
+                （最早）/ {room.checkInAndOut?.checkInLate}（最晚）
+              </li>
+              <li>退房時間：{room.checkInAndOut?.checkOut}</li>
             </ul>
             <ul className={cx('description')}>
               <li>單人間僅供一位客人使用。</li>
@@ -90,23 +119,9 @@ const RoomPage = ({ match }) => {
               </li>
               <li>房間裡有AC，當然還有WiFi。</li>
             </ul>
-            <div className={cx('amenities')}>
-              {room.amenities &&
-                Object.keys(room.amenities).map((amenity, idx) => (
-                  <div
-                    key={idx}
-                    className={cx('amenity', {
-                      ok: room.amenities[amenity],
-                    })}
-                  >
-                    <img src={`../../.././public/images/${amenity}.svg`} />
-                    <p>{amenitiesCh[amenity]}</p>
-                  </div>
-                ))}
-            </div>
+            <Amenities room={room}/>
             <div>
-              <h2>空房間狀態查詢</h2>
-              <Calendar />
+              <h2 className={cx('room-status')}>空房間狀態查詢</h2>
             </div>
           </div>
         </main>

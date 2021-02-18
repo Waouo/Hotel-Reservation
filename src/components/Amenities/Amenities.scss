@@ -1,0 +1,58 @@
+.amenities {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.amenity {
+  width: var(--amenity-width, 64px);
+  height: var(--amenity-height, 59px);
+  margin: 45px 36px 0 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  opacity: var(--opacity-ok, 0.5);
+
+  &::after {
+    content: '';
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    left: 55px;
+    background: var(--background-ok, url('../../../public/images/cancel.svg'));
+    display: var(--display-ok, block);
+  }
+
+  > img {
+    width: 40px;
+    height: 40px;
+  }
+
+  > p {
+    text-align: center;
+    margin-top: var(--margin, 0);
+    font-size: 10px;
+    line-height: 15px;
+    font-weight: 400;
+  }
+}
+
+.ok {
+  --background-ok: url('../../../public/images/Ok.svg');
+  --opacity-ok: 1;
+}
+
+.display__none {
+  display: none;
+}
+
+.booking {
+  --amenity-width: auto;
+  --amenity-height: 59px;
+  --amenity-margin: 45px 10px 0 0;
+  --amenity-name-margin: 0;
+  --display-ok: none;
+}

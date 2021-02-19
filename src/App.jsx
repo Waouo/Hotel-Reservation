@@ -12,6 +12,7 @@ import RoomPage from './pages/RoomPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 const App = () => {
+  //RoomsContext
   const [rooms, setRooms] = useState({})
   const [success, setSuccess] = useState(true)
 

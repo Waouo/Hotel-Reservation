@@ -38,6 +38,7 @@
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "date-fns": "^2.17.0",
+    "dayjs": "^1.10.4",
     "formik": "^2.2.6",
     "react": "^17.0.1",
     "react-calendar": "^3.3.1",

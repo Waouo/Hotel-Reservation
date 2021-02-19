@@ -9,8 +9,11 @@ import SlideItems from '../../components/SlideItems'
 import Booking from '../../components/Booking'
 import Amenities from '../../components/Amenities'
 import Calendar from '../../components/Calendar'
-
+import { BookingContext } from '../../contexts'
+import dayjs from 'dayjs'
 const cx = classNames.bind(styles)
+
+
 
 const RoomPage = ({ match }) => {
   const [room, setRoom] = useState({})
@@ -19,6 +22,20 @@ const RoomPage = ({ match }) => {
   const [bgNum, setBgNum] = useState(0)
   const [bgSrc, setBgSrc] = useState('')
   const [showBooking, setShowBooking] = useState(false)
+  //BookingContext
+  const tomorrow = dayjs().startOf('day').add(1, 'day')
+  const [state, setState] = useState([
+    {
+      startDate: tomorrow.toDate(),
+      endDate: tomorrow.add(1, 'day').toDate(),
+      key: 'selection',
+      isPickingStartDate: false,
+      isPickingEndDate: false,
+    },
+  ])
+  const [days, setDays] = useState('')
+  //TODO
+  const testData = {value: 123}
 
   useEffect(() => {
     ;(async function () {
@@ -42,7 +59,7 @@ const RoomPage = ({ match }) => {
   }, [bgNum, room.imageUrl, room])
 
   return (
-    <>
+    <BookingContext.Provider value={{ state, setState, days, setDays }}>
       <div className={cx('roomDetails')}>
         <TransitionGroup component={null}>
           <CSSTransition
@@ -124,7 +141,7 @@ const RoomPage = ({ match }) => {
           </div>
         </main>
       </div>
-    </>
+    </BookingContext.Provider>
   )
 }
 

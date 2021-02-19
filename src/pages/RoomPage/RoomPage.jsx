@@ -8,6 +8,7 @@ import { getRoomDetailsApi } from '../../Api/room'
 import SlideItems from '../../components/SlideItems'
 import Booking from '../../components/Booking'
 import Amenities from '../../components/Amenities'
+import Calendar from '../../components/Calendar'
 
 const cx = classNames.bind(styles)
 
@@ -20,18 +21,14 @@ const RoomPage = ({ match }) => {
   const [showBooking, setShowBooking] = useState(false)
 
   useEffect(() => {
-    (async function () {
+    ;(async function () {
       try {
         const { data } = await getRoomDetailsApi(match.params.id)
         console.log(data.room[0])
         setRoom(data.room[0])
         setBooking(data.booking[0])
         setSuccess(data.success)
-        console.log(
-          Object.keys(data.room[0].amenities).map(
-            (x) => data.room[0].amenities[x]
-          )
-        )
+        console.log(data)
       } catch (error) {
         console.error(`Something went wrong: ${error.message}`)
       }
@@ -101,8 +98,8 @@ const RoomPage = ({ match }) => {
             </h1>
             <ul className={cx('time')}>
               <li>
-                平日（一～四）價格：${room.normalDayPrice} / 假日（五〜日）價格：
-                ${room.holidayPrice}
+                平日（一～四）價格：${room.normalDayPrice} /
+                假日（五〜日）價格： ${room.holidayPrice}
               </li>
               <li>
                 入住時間：
@@ -119,9 +116,10 @@ const RoomPage = ({ match }) => {
               </li>
               <li>房間裡有AC，當然還有WiFi。</li>
             </ul>
-            <Amenities room={room}/>
+            <Amenities room={room} />
             <div>
               <h2 className={cx('room-status')}>空房間狀態查詢</h2>
+              <Calendar />
             </div>
           </div>
         </main>

@@ -41,6 +41,7 @@ const Calendar = () => {
     <DateRange
       className={cx('calendar')}
       disabledDates={bookingArr}
+      displayMode={'dateRange'}
       showDateDisplay={false}
       showMonthAndYearPickers={false}
       editableDateInputs={false}

@@ -4,3 +4,14 @@
   box-shadow: 0px 2px 6px #0000000a;
   border: 1px solid #38470b;
 }
+
+:global {
+  .rdrDayDisabled {
+    background: inherit !important;
+
+    > span {
+      text-decoration: line-through;
+      text-decoration-color: #aeb9bf;
+    }
+  }
+}

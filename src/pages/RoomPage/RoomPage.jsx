@@ -13,11 +13,9 @@ import { BookingContext } from '../../contexts'
 import dayjs from 'dayjs'
 const cx = classNames.bind(styles)
 
-
-
 const RoomPage = ({ match }) => {
   const [room, setRoom] = useState({})
-  const [booking, setBooking] = useState({})
+  const [booking, setBooking] = useState([])
   const [success, setSuccess] = useState(false)
   const [bgNum, setBgNum] = useState(0)
   const [bgSrc, setBgSrc] = useState('')
@@ -34,8 +32,9 @@ const RoomPage = ({ match }) => {
     },
   ])
   const [days, setDays] = useState('')
-  //TODO
-  const testData = {value: 123}
+  const bookingArr = booking
+    ? booking.map((x) => dayjs(x['date']).toDate())
+    : []
 
   useEffect(() => {
     ;(async function () {
@@ -43,7 +42,7 @@ const RoomPage = ({ match }) => {
         const { data } = await getRoomDetailsApi(match.params.id)
         console.log(data.room[0])
         setRoom(data.room[0])
-        setBooking(data.booking[0])
+        setBooking(data.booking)
         setSuccess(data.success)
         console.log(data)
       } catch (error) {
@@ -59,8 +58,10 @@ const RoomPage = ({ match }) => {
   }, [bgNum, room.imageUrl, room])
 
   return (
-    <BookingContext.Provider value={{ state, setState, days, setDays }}>
-      <div className={cx('roomDetails')}>
+    <BookingContext.Provider
+      value={{ state, setState, days, setDays, bookingArr }}
+    >
+      <div className={cx('room-details')}>
         <TransitionGroup component={null}>
           <CSSTransition
             classNames="animation-fade"
@@ -110,8 +111,9 @@ const RoomPage = ({ match }) => {
         </section>
         <main className={cx('info')}>
           <div className={cx('info-container')}>
-            <h1 className={cx('room-des')}>
-              1人・ 單人床・ 附早餐・衛浴1間・18平方公尺
+            <h1 className={cx('room-name')}>
+              {room.name}
+              <span>1人・ 單人床・ 附早餐・衛浴1間・18平方公尺</span>
             </h1>
             <ul className={cx('time')}>
               <li>
@@ -135,7 +137,7 @@ const RoomPage = ({ match }) => {
             </ul>
             <Amenities room={room} />
             <div>
-              <h2 className={cx('room-status')}>空房間狀態查詢</h2>
+              <h2 className={cx('room-empty-status')}>空房間狀態查詢</h2>
               <Calendar />
             </div>
           </div>

@@ -94,12 +94,14 @@ const RoomPage = ({ match }) => {
               <h2 className={cx('booking-price')}>
                 <span>${room.normalDayPrice}</span>&nbsp; / &nbsp; 1晚
               </h2>
-              <button
-                className={cx('booking-button')}
-                onClick={() => setShowBooking(true)}
-              >
-                Booking now
-              </button>
+              <a href="#booking">
+                <button
+                  className={cx('booking-button')}
+                  onClick={() => setShowBooking(true)}
+                >
+                  Booking now
+                </button>
+              </a>
             </div>
             <SlideItems
               num={3}

@@ -89,7 +89,7 @@ const Booking = ({ showBooking, setShowBooking, room }) => {
             )}
           </Formik>
         </section>
-        <section className={cx('room-info')}>
+        <section id="booking" className={cx('room-info')}>
           <div className={cx('container')}>
             <h1 className={cx('room-name')}>{room.name}</h1>
             <p>1人・ 單人床・附早餐・ 衛浴1間・18平方公尺</p>

@@ -15,7 +15,7 @@
 
   &-name {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     align-items: baseline;
     font: normal normal 700 40px/55px Open Sans;
 
@@ -25,7 +25,7 @@
   }
 
   &-empty-status {
-    margin-top: 28px;
+    margin: 28px 0 5px;
     font: normal normal 600 14px/24px Noto Sans, CJK TC;
   }
 }

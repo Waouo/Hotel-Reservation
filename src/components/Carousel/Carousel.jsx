@@ -1,16 +1,32 @@
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
-import styles from './SlideItems.scss'
+import styles from './Carousel.scss'
 import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-const SlideItems = ({ num, variable, setVariable, color }) => {
+const Carousel = ({ num, variable, setVariable, color }) => {
   const numArray = Array(num)
     .fill()
     .map((_, index) => index)
 
-  useEffect(() => {})
+  useEffect(() => {
+    let timer = setInterval(() => {
+      setVariable((e) => {
+        if (e < num - 1) {
+          setVariable(e + 1)
+        } else {
+          e = 0
+          setVariable(0)
+        }
+      })
+    }, 10000)
+
+    return () => {
+      clearInterval(timer)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <form className={cx('slideItems', color, { color: !!color })}>
@@ -32,11 +48,11 @@ const SlideItems = ({ num, variable, setVariable, color }) => {
   )
 }
 
-SlideItems.propTypes = {
+Carousel.propTypes = {
   num: PropTypes.number.isRequired,
   variable: PropTypes.number.isRequired,
   setVariable: PropTypes.func.isRequired,
   color: PropTypes.string,
 }
 
-export default SlideItems
+export default Carousel

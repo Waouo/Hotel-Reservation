@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import styles from './Home.scss'
 import classNames from 'classnames/bind'
-import { SlideItemsContext } from '../../contexts'
+import { CarouselContext } from '../../contexts'
 import bgImagesPath from './bgImagesPath'
 import Sidebar from '../../components/Sidebar'
 import Gallery from '../../components/Gallery'
@@ -13,6 +13,7 @@ const cx = classNames.bind(styles)
 const HomePage = () => {
   const [bgNum, setBgNum] = useState(0)
   let srcBg = bgImagesPath[bgNum]
+
 
   return (
     <div className={cx('home')}>
@@ -26,7 +27,7 @@ const HomePage = () => {
         <Sidebar />
         <Gallery />
       </div>
-      <SlideItemsContext.Provider
+      <CarouselContext.Provider
         value={{
           num: 4,
           variable: bgNum,
@@ -34,7 +35,7 @@ const HomePage = () => {
         }}
       >
         <Footer />
-      </SlideItemsContext.Provider>
+      </CarouselContext.Provider>
     </div>
   )
 }

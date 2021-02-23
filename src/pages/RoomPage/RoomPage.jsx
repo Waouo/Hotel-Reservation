@@ -6,7 +6,7 @@ import styles from './RoomPage.scss'
 import dayjs from 'dayjs'
 import PropTypes from 'prop-types'
 import { getRoomDetailsApi } from '../../Api/room'
-import SlideItems from '../../components/SlideItems'
+import Carousel from '../../components/Carousel'
 import Booking from '../../components/Booking'
 import Amenities from '../../components/Amenities'
 import Calendar from '../../components/Calendar'
@@ -155,7 +155,7 @@ const RoomPage = ({ match }) => {
                 </button>
               </a>
             </div>
-            <SlideItems
+            <Carousel
               num={3}
               variable={bgNum}
               setVariable={setBgNum}

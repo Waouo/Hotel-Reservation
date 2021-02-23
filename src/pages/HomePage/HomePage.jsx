@@ -14,7 +14,6 @@ const HomePage = () => {
   const [bgNum, setBgNum] = useState(0)
   let srcBg = bgImagesPath[bgNum]
 
-
   return (
     <div className={cx('home')}>
       <TransitionGroup component={null}>
@@ -26,16 +25,16 @@ const HomePage = () => {
       <div className={cx('home-container')}>
         <Sidebar />
         <Gallery />
+        <CarouselContext.Provider
+          value={{
+            num: 4,
+            variable: bgNum,
+            setVariable: setBgNum,
+          }}
+        >
+          <Footer />
+        </CarouselContext.Provider> 
       </div>
-      <CarouselContext.Provider
-        value={{
-          num: 4,
-          variable: bgNum,
-          setVariable: setBgNum,
-        }}
-      >
-        <Footer />
-      </CarouselContext.Provider>
     </div>
   )
 }

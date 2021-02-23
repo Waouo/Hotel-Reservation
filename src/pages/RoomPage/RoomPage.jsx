@@ -17,6 +17,7 @@ const cx = classNames.bind(styles)
 const RoomPage = ({ match }) => {
   const [room, setRoom] = useState({})
   const [booking, setBooking] = useState([])
+  const [des, setDes] = useState({})
   const [success, setSuccess] = useState(false)
   const [bgNum, setBgNum] = useState(0)
   const [bgSrc, setBgSrc] = useState('')
@@ -49,6 +50,7 @@ const RoomPage = ({ match }) => {
         const { data } = await getRoomDetailsApi(match.params.id)
         console.log(data.room[0])
         setRoom(data.room[0])
+        setDes(data.room[0].descriptionShort)
         setBooking(data.booking)
         setSuccess(data.success)
         console.log(data)
@@ -167,7 +169,15 @@ const RoomPage = ({ match }) => {
           <div className={cx('info-container')}>
             <h1 className={cx('room-name')}>
               {room.name}
-              <span>1人・ 單人床・ 附早餐・衛浴1間・18平方公尺</span>
+
+              <span>
+                {(des.GuestMin === des.GuestMax) === 1
+                  ? '1'
+                  : `${des.GuestMin} ~ ${des.GuestMax}`}
+                人・ {des.Bed && `${des.Bed.length}`}張床・ 附早餐・衛浴
+                {des['Private-Bath']}間・{des.Footage}
+                平方公尺
+              </span>
             </h1>
             <ul className={cx('time')}>
               <li>
@@ -182,12 +192,22 @@ const RoomPage = ({ match }) => {
               <li>退房時間：{room.checkInAndOut?.checkOut}</li>
             </ul>
             <ul className={cx('description')}>
-              <li>單人間僅供一位客人使用。</li>
-              <li>臥室配有單人床和私人浴室。</li>
+              <li>
+                {room.name}{' '}
+                {des.GuestMin === des.GuestMax
+                  ? '僅供一位客人'
+                  : `供${des.GuestMin}~${des.GuestMax}人使用`}
+                使用。
+              </li>
+              <li>
+                臥室配有
+                {des.Bed && des.Bed.length > 1 && `${des?.Bed.length}張 `}
+                {des.Bed && `${des.Bed[0]} Bed `}和私人浴室。
+              </li>
               <li>
                 您需要的一切為您準備：床單和毯子，毛巾，肥皂和洗髮水，吹風機。
               </li>
-              <li>房間裡有AC，當然還有WiFi。</li>
+              <li>房間裡有 AC，當然還有 WiFi。</li>
             </ul>
             <Amenities room={room} />
             <h2 className={cx('room-empty-status')}>空房間狀態查詢</h2>

@@ -30,7 +30,7 @@ const RoomPage = ({ match }) => {
   const [state, setState] = useState([
     {
       startDate: tomorrow.toDate(),
-      endDate: tomorrow.add(1, 'day').toDate(),
+      endDate: tomorrow.toDate(),
       key: 'selection',
       isPickingStartDate: false,
       isPickingEndDate: false,
@@ -78,8 +78,10 @@ const RoomPage = ({ match }) => {
       start = start.add(1, 'day')
       dateArr.push(start.format(fmt))
       weekArr.push(start.format('ddd'))
+    }
 
-      if (['Sat', 'Sun', 'Mon'].includes(start.format('ddd'))) {
+    for (let i of weekArr) {
+      if (['Fri', 'Sat', 'Sun'].includes(weekArr[i])) {
         holidayNights += 1
       } else {
         normalNights += 1
@@ -94,13 +96,6 @@ const RoomPage = ({ match }) => {
       room.normalDayPrice * normalNights + room.holidayPrice * holidayNights
     )
   }, [state, room.normalDayPrice, room.holidayPrice])
-
-  useEffect(() => {
-    console.log(weekArr)
-    console.log(dateArr)
-    console.log(normalNights)
-    console.log(holidayNights)
-  })
 
   return (
     <BookingContext.Provider
@@ -194,7 +189,7 @@ const RoomPage = ({ match }) => {
             <ul className={cx('description')}>
               <li>
                 {room.name}{' '}
-                {des.GuestMin === des.GuestMax
+                {(des.GuestMin === des.GuestMax) === 1
                   ? '僅供一位客人'
                   : `供${des.GuestMin}~${des.GuestMax}人使用`}
                 使用。

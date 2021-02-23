@@ -16,7 +16,7 @@
 .booking-container {
   border: 1px solid rgb(56, 71, 11);
   box-sizing: border-box;
-  width: 90%;
+  width: 1100px;
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -110,8 +110,8 @@
 /******** roomInfo ********/
 .room-info {
   width: 60%;
-  display: flex;
-  justify-content: center;
+  padding: 51px 30px 26px;
+  box-sizing: border-box;
   background: #ffffff;
   color: rgb(56, 71, 11);
 }
@@ -129,7 +129,7 @@
 }
 
 .second-title {
-  margin-top: 40px;
+  margin-top: 12px;
   font: normal normal bold 16px/24px Noto Sans, CJK TC;
 }
 

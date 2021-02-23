@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
-import styles from './RoomPage.scss'
 import classNames from 'classnames/bind'
+import styles from './RoomPage.scss'
+import dayjs from 'dayjs'
 import PropTypes from 'prop-types'
 import { getRoomDetailsApi } from '../../Api/room'
 import SlideItems from '../../components/SlideItems'
@@ -10,7 +11,7 @@ import Booking from '../../components/Booking'
 import Amenities from '../../components/Amenities'
 import Calendar from '../../components/Calendar'
 import { BookingContext } from '../../contexts'
-import dayjs from 'dayjs'
+
 const cx = classNames.bind(styles)
 
 const RoomPage = ({ match }) => {
@@ -21,7 +22,10 @@ const RoomPage = ({ match }) => {
   const [bgSrc, setBgSrc] = useState('')
   const [showBooking, setShowBooking] = useState(false)
   //BookingContext
+  const fmt = 'YYYY-MM-DD'
   const tomorrow = dayjs().startOf('day').add(1, 'day')
+  const [dateArr, setDateArr] = useState([])
+  const [weekArr, setWeekArr] = useState({})
   const [state, setState] = useState([
     {
       startDate: tomorrow.toDate(),
@@ -31,7 +35,10 @@ const RoomPage = ({ match }) => {
       isPickingEndDate: false,
     },
   ])
-  const [days, setDays] = useState('')
+  const [normalNights, setNormalNights] = useState(0)
+  const [holidayNights, setHolidayNights] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0)
+
   const bookingArr = booking
     ? booking.map((x) => dayjs(x['date']).toDate())
     : []
@@ -57,9 +64,53 @@ const RoomPage = ({ match }) => {
     }
   }, [bgNum, room.imageUrl, room])
 
+  useEffect(() => {
+    let start = dayjs(state[0].startDate),
+      end = dayjs(state[0].endDate),
+      dateArr = [start.format(fmt)],
+      weekArr = [start.format('ddd')],
+      normalNights = 0,
+      holidayNights = 0
+
+    while (start.format(fmt) !== end.format(fmt)) {
+      start = start.add(1, 'day')
+      dateArr.push(start.format(fmt))
+      weekArr.push(start.format('ddd'))
+
+      if (['Sat', 'Sun', 'Mon'].includes(start.format('ddd'))) {
+        holidayNights += 1
+      } else {
+        normalNights += 1
+      }
+    }
+
+    setDateArr(dateArr)
+    setWeekArr(weekArr)
+    setNormalNights(normalNights)
+    setHolidayNights(holidayNights)
+    setTotalPrice(
+      room.normalDayPrice * normalNights + room.holidayPrice * holidayNights
+    )
+  }, [state, room.normalDayPrice, room.holidayPrice])
+
+  useEffect(() => {
+    console.log(weekArr)
+    console.log(dateArr)
+    console.log(normalNights)
+    console.log(holidayNights)
+  })
+
   return (
     <BookingContext.Provider
-      value={{ state, setState, days, setDays, bookingArr }}
+      value={{
+        state,
+        setState,
+        normalNights,
+        holidayNights,
+        bookingArr,
+        dateArr,
+        totalPrice,
+      }}
     >
       <div className={cx('room-details')}>
         <TransitionGroup component={null}>
@@ -92,9 +143,10 @@ const RoomPage = ({ match }) => {
           <div className={cx('booking')}>
             <div>
               <h2 className={cx('booking-price')}>
-                <span>${room.normalDayPrice}</span>&nbsp; / &nbsp; 1晚
+                <span>${totalPrice}</span>
+                &nbsp; / &nbsp; {normalNights + holidayNights}晚
               </h2>
-              <a href="#booking">
+              <a href="#booking" style={{ margin: '0 auto' }}>
                 <button
                   className={cx('booking-button')}
                   onClick={() => setShowBooking(true)}
@@ -138,10 +190,8 @@ const RoomPage = ({ match }) => {
               <li>房間裡有AC，當然還有WiFi。</li>
             </ul>
             <Amenities room={room} />
-            <div>
-              <h2 className={cx('room-empty-status')}>空房間狀態查詢</h2>
-              <Calendar />
-            </div>
+            <h2 className={cx('room-empty-status')}>空房間狀態查詢</h2>
+            <Calendar />
           </div>
         </main>
       </div>

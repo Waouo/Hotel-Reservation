@@ -1,14 +1,49 @@
+import { useContext, useEffect, useState } from 'react'
 import styles from './Booking.scss'
 import classNames from 'classnames/bind'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import validationSchema from './validationSchema'
 import PropTypes from 'prop-types'
+import { Calendar } from 'react-date-range'
+import dayjs from 'dayjs'
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+import validationSchema from './validationSchema'
 import SubmitButton from '../SubmitButton'
 import Amenities from '../Amenities'
+import { BookingContext } from '../../contexts'
+
+dayjs.extend(isSameOrAfter)
 
 const cx = classNames.bind(styles)
 
+const fmt = 'YYYY - MM - DD'
+
+const tomorrow = dayjs().startOf('day').add(1, 'day')
+
 const Booking = ({ showBooking, setShowBooking, room }) => {
+  const {
+    state,
+    setState,
+    normalNights,
+    holidayNights,
+    bookingArr,
+    dateArr,
+    totalPrice,
+  } = useContext(BookingContext)
+
+  const setStartDate = (item) => {
+    if (dayjs(item).isSameOrAfter(dayjs(state[0].endDate), 'day')) {
+      setState([
+        { startDate: item, endDate: dayjs(item).add(1, 'day').toDate() },
+      ])
+    } else {
+      setState([{ ...state[0], startDate: item }])
+    }
+  }
+
+  const setEndDate = (item) => {
+    setState([{ ...state[0], endDate: item }])
+  }
+
   return (
     <div className={cx('booking-page', { show: showBooking })}>
       <div className={cx('booking-container')}>
@@ -35,7 +70,9 @@ const Booking = ({ showBooking, setShowBooking, room }) => {
                 onSubmit={formik.handleSubmit}
                 className={cx('container')}
               >
-                <label htmlFor="name">姓名</label>
+                <label className={cx('user-label')} htmlFor="name">
+                  姓名
+                </label>
                 <Field
                   name="name"
                   type="text"
@@ -45,41 +82,67 @@ const Booking = ({ showBooking, setShowBooking, room }) => {
                 <div className={cx('errorMessage')}>
                   <ErrorMessage name="name" />
                 </div>
-                <label htmlFor="phone">手機號碼</label>
+                <label className={cx('user-label')} htmlFor="phone">
+                  手機號碼
+                </label>
                 <Field
+                  className={cx('user-input')}
                   name="phone"
                   type="text"
                   maxLength={10}
-                  className={cx('user-input')}
+                  placeholder="09XXXXXXXX"
                 />
                 <div className={cx('errorMessage')}>
                   <ErrorMessage name="phone" />
                 </div>
-                <label htmlFor="phone">手機號碼</label>
-                <Field
-                  name="name"
-                  type="text"
-                  maxLength={20}
-                  className={cx('user-input')}
-                />
-                <div className={cx('errorMessage')}>
-                  <ErrorMessage name="name" />
+                <div style={{ position: 'relative' }}>
+                  <label className={cx('user-label')} htmlFor="phone">
+                    入住日期
+                  </label>
+                  <button
+                    type="button"
+                    className={cx('user-input', 'user-button')}
+                  >
+                    {state[0].startDate &&
+                      dayjs(state[0].startDate).format(fmt)}
+                  </button>
+                  <div className={cx('errorMessage')}></div>
+                  <Calendar
+                    minDate={tomorrow.toDate()}
+                    maxDate={tomorrow.add(89, 'day').toDate()}
+                    color="rgba(148, 156, 124, 0.8)"
+                    date={state[0].startDate}
+                    onChange={(item) => setStartDate(item)}
+                  ></Calendar>
                 </div>
-                <label htmlFor="phone">手機號碼</label>
-                <Field
-                  name="phone"
-                  type="text"
-                  maxLength={10}
-                  className={cx('user-input')}
-                />
-                <div className={cx('errorMessage')}>
-                  <ErrorMessage name="phone" />
+                <div style={{ position: 'relative' }}>
+                  <label className={cx('user-label')} htmlFor="phone">
+                    退房日期
+                  </label>
+                  <button
+                    type="button"
+                    className={cx('user-input', 'user-button')}
+                  >
+                    {state[0].endDate && dayjs(state[0].endDate).format(fmt)}
+                  </button>
+                  <div className={cx('errorMessage')}></div>
+                  <Calendar
+                    minDate={dayjs(state[0].startDate).add(1, 'day').toDate()}
+                    maxDate={tomorrow.add(89, 'day').toDate()}
+                    color="rgba(148, 156, 124, 0.8)"
+                    date={state[0].endDate}
+                    onChange={(item) => setEndDate(item)}
+                  ></Calendar>
                 </div>
-                <div className={cx('day')}>2天，1晚平日</div>
+                <div className={cx('day')}>
+                  {normalNights + holidayNights + 1}天，
+                  {normalNights >= 1 && `${normalNights}晚平日`}
+                  {normalNights >= 1 && holidayNights >= 1 && '，'}
+                  {holidayNights >= 1 && `${holidayNights}晚假日`}
+                </div>
                 <br />
                 <div className={cx('price')}>
-                  <p>總計</p>
-                  <p>1366</p>
+                  <p>總計 ${totalPrice}</p>
                 </div>
                 <SubmitButton background={'#949c7c'}>確認送出</SubmitButton>
                 <div className={cx('remark')}>

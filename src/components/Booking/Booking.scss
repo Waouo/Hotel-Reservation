@@ -38,29 +38,50 @@
 }
 
 /******** userInfo ********/
-.user-info {
-  width: 40%;
-  background: rgb(56, 71, 11);
-  display: flex;
-  justify-content: center;
-  font: normal normal normal 14px/20px Noto Sans, CJK TC;
-  color: #ffffff;
+.user {
+  &-info {
+    width: 40%;
+    background: rgb(56, 71, 11);
+    display: flex;
+    justify-content: center;
+    font: normal normal normal 14px/20px Noto Sans, CJK TC;
+    color: #ffffff;
+  }
 
-  label {
+  &-label {
     display: block;
-    margin-bottom: 7px;
+    margin: 7px 0 7px;
+  }
+
+  &-input {
+    width: 100%;
+    height: 38px;
+    padding: 10px 8px 10px;
+    text-align: left;
+    display: block;
+    box-sizing: border-box;
+    font: normal normal 600 16px/22px Open Sans;
+    color: #6a6a6a;
+    background: white;
+    border: none;
+  }
+
+  &-button {
+    color: '';
+
+    &::after {
+      content: '▾';
+      position: absolute;
+      right: 0;
+      color: rgb(56, 71, 11);
+      font-size: 20px;
+      transform: translateY(-1px);
+    }
   }
 }
 
-.user-input {
-  width: 100%;
-  height: 38px;
-}
-
 .errorMessage {
-  width: 100%;
   height: 16px;
-  margin-top: 7px;
   color: rgb(255, 1, 1);
 }
 

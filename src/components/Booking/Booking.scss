@@ -191,3 +191,21 @@
       0% 0% no-repeat padding-box;
   }
 }
+
+.calendar {
+  position: relative;
+  display: var(--calendar-display, none);
+
+  :global {
+    .rdrCalendarWrapper {
+      position: absolute;
+      left: 400px;
+      top: -55px;
+      z-index: 1;
+    }
+  }
+}
+
+.display {
+  --calendar-display: true;
+}

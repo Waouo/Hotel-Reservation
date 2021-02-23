@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from './Booking.scss'
 import classNames from 'classnames/bind'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
@@ -10,6 +10,7 @@ import validationSchema from './validationSchema'
 import SubmitButton from '../SubmitButton'
 import Amenities from '../Amenities'
 import { BookingContext } from '../../contexts'
+import { reservedRoomApi } from '../../Api/room'
 
 dayjs.extend(isSameOrAfter)
 
@@ -20,6 +21,12 @@ const fmt = 'YYYY - MM - DD'
 const tomorrow = dayjs().startOf('day').add(1, 'day')
 
 const Booking = ({ showBooking, setShowBooking, room }) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [isError, setIsError] = useState(false)
+  const [showStartCalendar, setShowStartCalendar] = useState(false)
+  const [showEndCalendar, setShowEndCalendar] = useState(false)
+
   const {
     state,
     setState,
@@ -38,10 +45,24 @@ const Booking = ({ showBooking, setShowBooking, room }) => {
     } else {
       setState([{ ...state[0], startDate: item }])
     }
+
+    setShowStartCalendar(false)
   }
 
   const setEndDate = (item) => {
     setState([{ ...state[0], endDate: item }])
+
+    setShowEndCalendar(!showEndCalendar)
+  }
+
+  const handleStartCalendar = () => {
+    setShowStartCalendar(!showStartCalendar)
+    setShowEndCalendar(false)
+  }
+
+  const handleEndCalendar = () => {
+    setShowEndCalendar(!showEndCalendar)
+    setShowStartCalendar(false)
   }
 
   return (
@@ -54,14 +75,25 @@ const Booking = ({ showBooking, setShowBooking, room }) => {
           <Formik
             initialValues={{
               name: '',
-              phone: '',
+              tel: '',
             }}
             validationSchema={validationSchema}
-            onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2))
-                setSubmitting(false)
-              }, 400)
+            onSubmit={async (values, { setSubmitting }) => {
+              setIsLoading(true)
+              setIsError(false)
+
+              const data = JSON.stringify({ ...values, date: dateArr })
+
+              try {
+                await reservedRoomApi(room.id, data)
+                setIsSuccess(true)
+                alert(data)
+              } catch (error) {
+                setIsError(true)
+              }
+
+              setIsLoading(false)
+              setSubmitting(false)
             }}
           >
             {(formik) => (
@@ -82,57 +114,66 @@ const Booking = ({ showBooking, setShowBooking, room }) => {
                 <div className={cx('errorMessage')}>
                   <ErrorMessage name="name" />
                 </div>
-                <label className={cx('user-label')} htmlFor="phone">
+                <label className={cx('user-label')} htmlFor="tel">
                   手機號碼
                 </label>
                 <Field
                   className={cx('user-input')}
-                  name="phone"
+                  name="tel"
                   type="text"
                   maxLength={10}
                   placeholder="09XXXXXXXX"
                 />
                 <div className={cx('errorMessage')}>
-                  <ErrorMessage name="phone" />
+                  <ErrorMessage name="tel" />
                 </div>
                 <div style={{ position: 'relative' }}>
-                  <label className={cx('user-label')} htmlFor="phone">
-                    入住日期
-                  </label>
+                  <label className={cx('user-label')}>入住日期</label>
                   <button
                     type="button"
                     className={cx('user-input', 'user-button')}
+                    onClick={handleStartCalendar}
                   >
                     {state[0].startDate &&
                       dayjs(state[0].startDate).format(fmt)}
                   </button>
                   <div className={cx('errorMessage')}></div>
-                  <Calendar
-                    minDate={tomorrow.toDate()}
-                    maxDate={tomorrow.add(89, 'day').toDate()}
-                    color="rgba(148, 156, 124, 0.8)"
-                    date={state[0].startDate}
-                    onChange={(item) => setStartDate(item)}
-                  ></Calendar>
+                  <div
+                    className={cx('calendar', { display: showStartCalendar })}
+                  >
+                    <Calendar
+                      minDate={tomorrow.toDate()}
+                      maxDate={tomorrow.add(89, 'day').toDate()}
+                      color="rgba(148, 156, 124, 0.8)"
+                      date={state[0].startDate}
+                      disabledDates={bookingArr}
+                      onChange={(item) => setStartDate(item)}
+                      onClick={() => setShowBooking(false)}
+                    ></Calendar>
+                  </div>
                 </div>
                 <div style={{ position: 'relative' }}>
-                  <label className={cx('user-label')} htmlFor="phone">
-                    退房日期
-                  </label>
+                  <label className={cx('user-label')}>退房日期</label>
                   <button
                     type="button"
                     className={cx('user-input', 'user-button')}
+                    onClick={handleEndCalendar}
                   >
                     {state[0].endDate && dayjs(state[0].endDate).format(fmt)}
                   </button>
                   <div className={cx('errorMessage')}></div>
-                  <Calendar
-                    minDate={dayjs(state[0].startDate).add(1, 'day').toDate()}
-                    maxDate={tomorrow.add(89, 'day').toDate()}
-                    color="rgba(148, 156, 124, 0.8)"
-                    date={state[0].endDate}
-                    onChange={(item) => setEndDate(item)}
-                  ></Calendar>
+                  <div className={cx('calendar', { display: showEndCalendar })}>
+                    <Calendar
+                      className={cx('calendar')}
+                      minDate={dayjs(state[0].startDate).add(1, 'day').toDate()}
+                      maxDate={tomorrow.add(89, 'day').toDate()}
+                      color="rgba(148, 156, 124, 0.8)"
+                      date={state[0].endDate}
+                      disabledDates={bookingArr}
+                      onChange={(item) => setEndDate(item)}
+                      onClick={() => setShowBooking(false)}
+                    ></Calendar>
+                  </div>
                 </div>
                 <div className={cx('day')}>
                   {normalNights + holidayNights + 1}天，
@@ -147,6 +188,10 @@ const Booking = ({ showBooking, setShowBooking, room }) => {
                 <SubmitButton background={'#949c7c'}>確認送出</SubmitButton>
                 <div className={cx('remark')}>
                   此預約系統僅預約功能，並不會對您進行收費
+                </div>
+                <div className={cx('remark')}>
+                  {isLoading ? '處理中...' : null}
+                  {isError ? '您所提供的訂房時間(date)已有訂房。' : null}
                 </div>
               </Form>
             )}

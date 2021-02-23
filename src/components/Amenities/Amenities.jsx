@@ -7,14 +7,14 @@ const cx = classNames.bind(styles)
 
 const Amenities = ({ room, displayOnlyTrue, amenityStyle, type }) => {
   return (
-    <div className={cx('amenities')}>
+    <ul className={cx('amenities')}>
       {room.amenities &&
         Object.keys(room.amenities).map((amenity, idx) => (
-          <div
+          <li
             key={idx}
             className={cx(
               'amenity',
-              `${type}`,
+              { [`${type}`]: type },
               {
                 ok: room.amenities[amenity],
               },
@@ -22,11 +22,11 @@ const Amenities = ({ room, displayOnlyTrue, amenityStyle, type }) => {
             )}
             style={amenityStyle}
           >
-            <img src={`../../.././public/images/${amenity}.svg`} />
-            <p>{amenitiesCh[amenity]}</p>
-          </div>
+              <img src={`../../.././public/images/${amenity}.svg`} />
+              <p>{amenitiesCh[amenity]}</p>
+          </li>
         ))}
-    </div>
+    </ul>
   )
 }
 

@@ -9,8 +9,6 @@ import { BookingContext } from '../../contexts'
 
 const cx = classNames.bind(styles)
 
-const fmt = 'YYYY-MM-DD'
-
 const tomorrow = dayjs().startOf('day').add(1, 'day')
 
 const Calendar = () => {

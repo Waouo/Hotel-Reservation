@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext} from 'react'
 import styles from './Calendar.scss'
 import classNames from 'classnames/bind'
 import 'react-date-range/dist/styles.css' // main style file

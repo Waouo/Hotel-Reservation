@@ -4,7 +4,7 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap-grid.min.css'
 import { useEffect, useState } from 'react'
 import { RoomsContext } from './contexts'
 import { getRoomsApi } from './Api/room'

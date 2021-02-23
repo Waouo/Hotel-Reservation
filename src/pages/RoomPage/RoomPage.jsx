@@ -113,7 +113,11 @@ const RoomPage = ({ match }) => {
         <TransitionGroup component={null}>
           <CSSTransition
             classNames="animation-fade"
-            timeout={500}
+            timeout={{
+              appear: 1000,
+              enter: 1000,
+              exit: 0,
+            }}
             key={showBooking}
           >
             <Booking
@@ -128,7 +132,7 @@ const RoomPage = ({ match }) => {
           <TransitionGroup component={null}>
             <CSSTransition
               classNames="animation-fade"
-              timeout={500}
+              timeout={1000}
               key={bgNum}
             >
               <img className={cx('bg')} src={bgSrc} alt={'background-image'} />

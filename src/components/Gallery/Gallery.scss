@@ -4,23 +4,22 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-content: flex-start;
+  align-content: center;
   order: 2;
-
-  @media (max-width: 630px) {
-    width: 100%;
-    margin-top: 30px;
-  }
 
   &-image {
     width: 275px;
     height: 275px;
 
-    @media (max-width: 840px) {
-      width: 200px;
-      height: 200px;
+    @media (max-width: 600px) {
+      width: 150px;
+      height: 150px;
     }
   }
+
+  @media (max-width: 1200px) {
+      margin-top: 20px;
+    }
 }
 
 .link {
@@ -39,14 +38,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all .4s ease;
+  transition: all 0.4s ease;
 
   > span {
     font: normal normal normal 19px/26px 'Open Sans';
     letter-spacing: 0px;
     color: white;
     opacity: 0;
-    transition: opacity .4s ease;
+    transition: opacity 0.4s ease;
   }
 
   &:hover {

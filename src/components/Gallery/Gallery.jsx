@@ -14,7 +14,7 @@ const Gallery = () => {
   })
 
   return (
-    <section className={cx('gallery')}>
+    <section className={cx('gallery', 'col-12 col-xl-9')}>
       {success ? (
         Array.from(rooms).map((room) => (
           <Link key={room.id} to={`room/${room.id}`} className={cx('link')}>

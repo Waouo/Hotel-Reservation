@@ -80,7 +80,7 @@ const RoomPage = ({ match }) => {
       weekArr.push(start.format('ddd'))
     }
 
-    for (let i of weekArr) {
+    for (let i in weekArr) {
       if (['Fri', 'Sat', 'Sun'].includes(weekArr[i])) {
         holidayNights += 1
       } else {

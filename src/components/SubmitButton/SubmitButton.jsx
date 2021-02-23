@@ -6,7 +6,7 @@ const cx = classNames.bind(styles)
 
 const SubmitButton = ({ background, children }) => {
   return (
-    <button className={cx('submit-button')} style={{ background }}>
+    <button type="submit" className={cx('submit-button')} style={{ background }}>
       {children}
     </button>
   )

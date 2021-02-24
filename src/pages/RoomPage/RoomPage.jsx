@@ -6,15 +6,16 @@ import styles from './RoomPage.scss'
 import dayjs from 'dayjs'
 import PropTypes from 'prop-types'
 import { getRoomDetailsApi } from '../../Api/room'
-import Carousel from '../../components/Carousel'
 import Booking from '../../components/Booking'
+import Carousel from '../../components/Carousel'
 import Amenities from '../../components/Amenities'
 import Calendar from '../../components/Calendar'
+import SubmitButton from '../../components/SubmitButton'
 import { BookingContext } from '../../contexts'
 
 const cx = classNames.bind(styles)
 
-const RoomPage = ({ match }) => {
+const RoomPage = ({ match, history }) => {
   const [room, setRoom] = useState({})
   const [booking, setBooking] = useState([])
   const [des, setDes] = useState({})
@@ -124,6 +125,7 @@ const RoomPage = ({ match }) => {
               showBooking={showBooking}
               setShowBooking={setShowBooking}
               room={room}
+              history={history}
             />
           </CSSTransition>
         </TransitionGroup>
@@ -142,18 +144,15 @@ const RoomPage = ({ match }) => {
             <span className={cx('arrow')}> &lt; </span>查看其它房型
           </Link>
           <div className={cx('booking')}>
-            <div>
+            <div style={{ width: '252px' }}>
               <h2 className={cx('booking-price')}>
-                <span>${totalPrice}</span>
+                <span>${totalPrice || null}</span>
                 &nbsp; / &nbsp; {normalNights + holidayNights}晚
               </h2>
               <a href="#booking" style={{ margin: '0 auto' }}>
-                <button
-                  className={cx('booking-button')}
-                  onClick={() => setShowBooking(true)}
-                >
+                <SubmitButton onClick={() => setShowBooking(true)}>
                   Booking now
-                </button>
+                </SubmitButton>
               </a>
             </div>
             <Carousel
@@ -170,9 +169,9 @@ const RoomPage = ({ match }) => {
               {room.name}
 
               <span>
-                {(des.GuestMin === des.GuestMax) === 1
+                {des.GuestMax === 1
                   ? '1'
-                  : `${des.GuestMin} ~ ${des.GuestMax}`}
+                  : `${des.GuestMin || ''} ~ ${des.GuestMax || ''}`}
                 人・ {des.Bed && `${des.Bed.length}`}張床・ 附早餐・衛浴
                 {des['Private-Bath']}間・{des.Footage}
                 平方公尺
@@ -193,9 +192,9 @@ const RoomPage = ({ match }) => {
             <ul className={cx('description')}>
               <li>
                 {room.name}{' '}
-                {(des.GuestMin === des.GuestMax) === 1
+                {des.GuestMax === 1
                   ? '僅供一位客人'
-                  : `供${des.GuestMin}~${des.GuestMax}人使用`}
+                  : `供${des.GuestMin || ''}~${des.GuestMax || ''}人使用`}
                 使用。
               </li>
               <li>

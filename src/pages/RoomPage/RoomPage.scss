@@ -7,7 +7,7 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
-    
+
     @media (max-width: 576px) {
       flex-direction: column;
     }
@@ -102,20 +102,6 @@
 
     > span {
       font-size: 36px;
-    }
-  }
-
-  &-button {
-    width: 252px;
-    height: 44px;
-    
-    background-color: #38470b;
-    color: white;
-    border: none;
-    font-weight: 600;
-
-    &:hover {
-      background-color: rgba(56, 71, 11, 0.8);
     }
   }
 }

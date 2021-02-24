@@ -1,9 +1,22 @@
-.booking-page {
-  width: 100%;
-  min-height: 768px;
-  position: absolute;
-  z-index: 2;
-  display: var(--display, none);
+.booking {
+  &-page {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    display: var(--display, none);
+    backdrop-filter: blur(5px);
+  }
+
+  &-container {
+    border: 1px solid rgb(56, 71, 11);
+    box-sizing: border-box;
+    width: 1100px;
+    min-height: 600px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 .show {
@@ -13,28 +26,17 @@
   backdrop-filter: blur(5px);
 }
 
-.booking-container {
-  border: 1px solid rgb(56, 71, 11);
-  box-sizing: border-box;
-  width: 1100px;
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .exit {
   position: absolute;
   top: 23px;
   right: 35px;
   background-color: rgba(255, 255, 255, 0);
-  color: rgb(56, 71, 11);
+  color: var(--color, rgb(56, 71, 11));
   border: none;
 }
 
-.container {
-  width: 100%;
-  height: 100%;
-  padding: 50px 60px;
+.light {
+  --color: white;
 }
 
 /******** userInfo ********/
@@ -46,6 +48,12 @@
     justify-content: center;
     font: normal normal normal 14px/20px Noto Sans, CJK TC;
     color: #ffffff;
+  }
+
+  &-container {
+    width: 100%;
+    height: 100%;
+    padding: 50px 65px 20px;
   }
 
   &-label {
@@ -108,63 +116,32 @@
 }
 
 /******** roomInfo ********/
-.room-info {
-  width: 60%;
-  padding: 51px 30px 26px;
-  box-sizing: border-box;
-  background: #ffffff;
-  color: rgb(56, 71, 11);
-}
+.room {
+  &-info {
+    width: 60%;
+    height: 100%;
+    padding: 51px 30px 26px;
+    box-sizing: border-box;
+    background: #ffffff;
+    color: rgb(56, 71, 11);
+  }
 
-.room-name {
-  margin-bottom: 10px;
-  font: normal normal bold 24px/33px Open Sans;
-}
+  &-name {
+    margin-bottom: 10px;
+    font: normal normal bold 24px/33px Open Sans;
+  }
 
-.room-description {
-  font: normal normal normal 12px/26px Noto Sans, CJK TC;
-  > li {
-    margin: 5px 0;
+  &-description {
+    font: normal normal normal 12px/26px Noto Sans, CJK TC;
+    > li {
+      margin: 5px 0;
+    }
   }
 }
 
 .second-title {
   margin-top: 12px;
   font: normal normal bold 16px/24px Noto Sans, CJK TC;
-}
-
-.flow-chart-container {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.flow-chart {
-  width: 160px;
-  height: 136px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-.flow-chart-icon-bg {
-  width: 100%;
-  height: 35%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgb(148, 156, 124) 0% 0% no-repeat padding-box;
-}
-
-.flow-chart-des {
-  width: 100%;
-  height: 65%;
-  padding-top: 12px;
-  text-align: center;
-  font: normal normal normal 12px/18px Noto Sans, CJK TC;
-  border: 1px solid rgb(148, 156, 151);
-  border-radius: 0 0 10px 10px;
-  box-sizing: border-box;
 }
 
 .room-name,
@@ -176,6 +153,42 @@
     flex: 1 1;
     border-bottom: 1px solid rgb(148, 156, 151, 0.5);
     margin: auto auto auto 10px;
+  }
+}
+
+.flow-chart {
+  &-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-item {
+    width: 160px;
+    height: 136px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-icon-bg {
+    width: 100%;
+    height: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(148, 156, 124) 0% 0% no-repeat padding-box;
+  }
+
+  &-des {
+    width: 100%;
+    height: 65%;
+    padding-top: 12px;
+    text-align: center;
+    font: normal normal normal 12px/18px Noto Sans, CJK TC;
+    border: 1px solid rgb(148, 156, 151);
+    border-radius: 0 0 10px 10px;
+    box-sizing: border-box;
   }
 }
 

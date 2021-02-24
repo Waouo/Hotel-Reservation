@@ -8,7 +8,7 @@
 .amenity {
   width: var(--amenity-width, 64px);
   height: var(--amenity-height, 59px);
-  margin: 45px 36px 0 0;
+  margin: var(--amenity-margin, 45px 36px 0 0);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -52,7 +52,7 @@
 .booking {
   --amenity-width: auto;
   --amenity-height: 59px;
-  --amenity-margin: 45px 10px 0 0;
+  --amenity-margin: 25px 10px 25px 0;
   --amenity-name-margin: 0;
   --display-ok: none;
 }

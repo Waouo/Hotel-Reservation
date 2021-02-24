@@ -17,7 +17,7 @@ const HomePage = () => {
   return (
     <div className={cx('home')}>
       <TransitionGroup component={null}>
-        <CSSTransition classNames="animation-fade" timeout={500} key={bgNum}>
+        <CSSTransition classNames="animation-fade" timeout={1000} key={bgNum}>
           <img className={cx('bg')} src={srcBg} />
         </CSSTransition>
       </TransitionGroup>

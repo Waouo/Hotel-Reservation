@@ -28,15 +28,6 @@
   /* 增加/刪除清單時的入場/退場動畫 */
   $fadeTransitionTime: 1000ms;
 
-  .animation-fade {
-    &-enter,
-    &-enter-active,
-    &-exit,
-    &-exit-active {
-      position: absolute !important;
-    }
-  }
-
   .animation-fade-enter {
     opacity: 0;
   }

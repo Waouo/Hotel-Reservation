@@ -4,16 +4,22 @@ import PropTypes from 'prop-types'
 
 const cx = classNames.bind(styles)
 
-const SubmitButton = ({ background, children }) => {
+const SubmitButton = ({ them, children, onClick }) => {
   return (
-    <button type="submit" className={cx('submit-button')} style={{ background }}>
+    <button
+      type="submit"
+      className={cx('submit-button', { [`${them}`]: !!them })}
+      onClick={onClick}
+    >
       {children}
     </button>
   )
 }
 
 SubmitButton.propTypes = {
-  background: PropTypes.string.isRequired,
+  them: PropTypes.string,
+  border: PropTypes.string,
+  onClick: PropTypes.func,
   children: PropTypes.string.isRequired,
 }
 

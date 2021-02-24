@@ -116,16 +116,16 @@
 }
 
 /******** roomInfo ********/
-.room {
-  &-info {
-    width: 60%;
-    height: 100%;
-    padding: 51px 30px 26px;
-    box-sizing: border-box;
-    background: #ffffff;
-    color: rgb(56, 71, 11);
-  }
+.booking-info {
+  width: 60%;
+  height: 100%;
+  padding: 51px 30px 26px;
+  box-sizing: border-box;
+  background: #ffffff;
+  color: rgb(56, 71, 11);
+}
 
+.room {
   &-name {
     margin-bottom: 10px;
     font: normal normal bold 24px/33px Open Sans;

@@ -6,7 +6,7 @@ import styles from './RoomPage.scss'
 import dayjs from 'dayjs'
 import PropTypes from 'prop-types'
 import { getRoomDetailsApi } from '../../Api/room'
-import Booking from '../../components/Booking'
+import BookingPage from '../BookingPage'
 import Carousel from '../../components/Carousel'
 import Amenities from '../../components/Amenities'
 import Calendar from '../../components/Calendar'
@@ -121,7 +121,7 @@ const RoomPage = ({ match, history }) => {
             }}
             key={showBooking}
           >
-            <Booking
+            <BookingPage
               showBooking={showBooking}
               setShowBooking={setShowBooking}
               room={room}

@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import styles from './Booking.scss'
+import styles from './BookingPage.scss'
 import classNames from 'classnames/bind'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import PropTypes from 'prop-types'
@@ -7,9 +7,9 @@ import { Calendar } from 'react-date-range'
 import dayjs from 'dayjs'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import validationSchema from './validationSchema'
-import SubmitButton from '../SubmitButton'
-import Amenities from '../Amenities'
-import BookingResult from '../BookingResult'
+import SubmitButton from '../../components/SubmitButton'
+import Amenities from '../../components/Amenities'
+import BookingResult from '../../components/BookingResult'
 import { BookingContext } from '../../contexts'
 import { reservedRoomApi } from '../../Api/room'
 
@@ -21,7 +21,7 @@ const fmt = 'YYYY - MM - DD'
 
 const tomorrow = dayjs().startOf('day').add(1, 'day')
 
-const Booking = ({ showBooking, setShowBooking, room }) => {
+const BookingPage = ({ showBooking, setShowBooking, room }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
@@ -278,10 +278,10 @@ const Booking = ({ showBooking, setShowBooking, room }) => {
   )
 }
 
-Booking.propTypes = {
+BookingPage.propTypes = {
   showBooking: PropTypes.bool.isRequired,
   setShowBooking: PropTypes.func.isRequired,
   room: PropTypes.object.isRequired,
 }
 
-export default Booking
+export default BookingPage

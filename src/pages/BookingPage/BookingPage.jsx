@@ -139,6 +139,13 @@ const BookingPage = ({ showBooking, setShowBooking, room }) => {
                       type="text"
                       maxLength={10}
                       placeholder="09XXXXXXXX"
+                      onChange={(e) => {
+                        if (/\D/.test(e.target.value)) {
+                          return
+                        }
+
+                        formik.setFieldValue('tel', e.target.value)
+                      }}
                     />
                     <div className={cx('errorMessage')}>
                       <ErrorMessage name="tel" />

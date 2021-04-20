@@ -45,6 +45,7 @@ const RoomPage = ({ match, history }) => {
     ? booking.map((x) => dayjs(x['date']).toDate())
     : []
 
+  //Get room details from Api
   useEffect(() => {
     ;(async function () {
       try {
@@ -63,6 +64,11 @@ const RoomPage = ({ match, history }) => {
 
   useEffect(() => {
     if (room.imageUrl) {
+      room.imageUrl.forEach((imageUrl) => {
+        let img = new Image()
+        img.src = imageUrl
+      })
+
       setBgSrc(room.imageUrl[bgNum])
     }
   }, [bgNum, room.imageUrl, room])

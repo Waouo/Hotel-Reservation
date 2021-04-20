@@ -19,8 +19,6 @@ const cx = classNames.bind(styles)
 
 const fmt = 'YYYY - MM - DD'
 
-const tomorrow = dayjs().startOf('day').add(1, 'day')
-
 const BookingPage = ({ showBooking, setShowBooking, room }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -31,6 +29,7 @@ const BookingPage = ({ showBooking, setShowBooking, room }) => {
   const {
     state,
     setState,
+    tomorrow,
     normalNights,
     holidayNights,
     bookingArr,

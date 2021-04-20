@@ -1,18 +1,15 @@
-import { useContext} from 'react'
+import { useContext } from 'react'
 import styles from './Calendar.scss'
 import classNames from 'classnames/bind'
 import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css' // theme css file
 import { DateRange } from 'react-date-range'
-import dayjs from 'dayjs'
 import { BookingContext } from '../../contexts'
 
 const cx = classNames.bind(styles)
 
-const tomorrow = dayjs().startOf('day').add(1, 'day')
-
 const Calendar = () => {
-  const { state, setState, bookingArr } = useContext(BookingContext)
+  const { state, setState, bookingArr, tomorrow } = useContext(BookingContext)
 
   return (
     <>

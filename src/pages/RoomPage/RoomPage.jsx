@@ -23,11 +23,12 @@ const RoomPage = ({ match, history }) => {
   const [bgNum, setBgNum] = useState(0)
   const [bgSrc, setBgSrc] = useState('')
   const [showBooking, setShowBooking] = useState(false)
+
   //BookingContext
   const fmt = 'YYYY-MM-DD'
-  const tomorrow = dayjs().startOf('day').add(1, 'day')
   const [dateArr, setDateArr] = useState([])
   const [weekArr, setWeekArr] = useState({})
+  const tomorrow = dayjs().startOf('day').add(1, 'day')
   const [state, setState] = useState([
     {
       startDate: tomorrow.toDate(),
@@ -109,6 +110,7 @@ const RoomPage = ({ match, history }) => {
       value={{
         state,
         setState,
+        tomorrow,
         normalNights,
         holidayNights,
         bookingArr,

@@ -1,4 +1,6 @@
 // HomePage
+@import '../../style/_mixin.scss';
+
 .home {
   width: 100%;
   min-width: 576px;
@@ -17,17 +19,7 @@
   transition: all 0.5 ease-in;
 
   &::after {
-    content: '';
-    position: fixed;
-    z-index: -1;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    @include after_cover(rgba(0, 0, 0, 0.6));
   }
 
   &-container {

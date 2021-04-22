@@ -1,4 +1,6 @@
 /****RoomPage****/
+@import '../../style/_mixin.scss';
+
 .room {
   &-details {
     min-height: 768px;
@@ -41,16 +43,10 @@
   order: 1;
 
   &::after {
-    content: '';
-    width: 42%;
-    height: 100vh;
-    position: fixed;
-    z-index: -1;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(180deg, #ffffff00 0%, #ffffff 100%) no-repeat;
+    
+    @include after_cover(
+      linear-gradient(180deg, #ffffff00 0%, #ffffff 100%) no-repeat
+    );
   }
 
   @media (max-width: 576px) {

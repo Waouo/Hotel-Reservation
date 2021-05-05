@@ -30,8 +30,7 @@ const BookingPage = ({ showBooking, setShowBooking, room }) => {
     state,
     setState,
     tomorrow,
-    normalNights,
-    holidayNights,
+    nightsObj,
     bookingArr,
     dateArr,
     totalPrice,
@@ -205,10 +204,10 @@ const BookingPage = ({ showBooking, setShowBooking, room }) => {
                       </div>
                     </div>
                     <div className={cx('day')}>
-                      {normalNights + holidayNights}天，
-                      {normalNights >= 1 && `${normalNights}晚平日`}
-                      {normalNights >= 1 && holidayNights >= 1 && '，'}
-                      {holidayNights >= 1 && `${holidayNights}晚假日`}
+                      {nightsObj.normal + nightsObj.holiday}天，
+                      {nightsObj.normal >= 1 && `${nightsObj.normal}晚平日`}
+                      {nightsObj.normal >= 1 && nightsObj.holiday >= 1 && '，'}
+                      {nightsObj.holiday >= 1 && `${nightsObj.holiday}晚假日`}
                     </div>
                     <br />
                     <div className={cx('price')}>

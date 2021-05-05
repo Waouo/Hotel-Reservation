@@ -5,29 +5,16 @@ import {
   Redirect,
 } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap-grid.min.css'
-import { useEffect, useState } from 'react'
 import { RoomsContext } from './contexts'
-import { getRoomsApi } from './Api/room'
 import HomePage from './pages/HomePage'
 import RoomPage from './pages/RoomPage'
 import NotFoundPage from './pages/NotFoundPage'
+import useGetRooms from './hook/useGetRooms'
 
 const App = () => {
   //RoomsContext
-  const [rooms, setRooms] = useState({})
-  const [success, setSuccess] = useState(true)
+  const { rooms, success } = useGetRooms()
 
-  useEffect(() => {
-    ;(async function () {
-      try {
-        const { data } = await getRoomsApi()
-        setRooms(data.items)
-        setSuccess(data.success)
-      } catch (error) {
-        console.error(`Something went wrong: ${error.message}`)
-      }
-    })()
-  }, [])
   return (
     <>
       <RoomsContext.Provider value={{ rooms, success }}>

@@ -5,7 +5,6 @@ import classNames from 'classnames/bind'
 import styles from './RoomPage.scss'
 import dayjs from 'dayjs'
 import PropTypes from 'prop-types'
-import { getRoomDetailsApi } from '../../Api/room'
 import BookingPage from '../BookingPage'
 import Carousel from '../../components/Carousel'
 import Amenities from '../../components/Amenities'
@@ -13,16 +12,14 @@ import Calendar from '../../components/Calendar'
 import SubmitButton from '../../components/SubmitButton'
 import { BookingContext } from '../../contexts'
 import useBackGround from '../../hook/useBackGround'
+import useGetRoomDetails from '../../hook/useGetRoomDetails'
 
 const cx = classNames.bind(styles)
 
 const RoomPage = ({ match, history }) => {
-  const [room, setRoom] = useState({})
-  const [booking, setBooking] = useState([])
-  const [des, setDes] = useState({})
-  const [success, setSuccess] = useState(false)
-  const [showBooking, setShowBooking] = useState(false)
+  const { room, booking, des, success } = useGetRoomDetails(match.params.id)
   const bgObj = useBackGround(room.imageUrl)
+  const [showBooking, setShowBooking] = useState(false)
 
   //BookingContext
   const fmt = 'YYYY-MM-DD'
@@ -45,23 +42,6 @@ const RoomPage = ({ match, history }) => {
   const bookingArr = booking
     ? booking.map((x) => dayjs(x['date']).toDate())
     : []
-
-  //Get room details from Api
-  useEffect(() => {
-    ;(async function () {
-      try {
-        const { data } = await getRoomDetailsApi(match.params.id)
-        console.log(data.room[0])
-        setRoom(data.room[0])
-        setDes(data.room[0].descriptionShort)
-        setBooking(data.booking)
-        setSuccess(data.success)
-        console.log(data)
-      } catch (error) {
-        console.error(`Something went wrong: ${error.message}`)
-      }
-    })()
-  }, [match.params.id])
 
   useEffect(() => {
     let start = dayjs(state[0].startDate),

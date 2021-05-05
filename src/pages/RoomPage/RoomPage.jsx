@@ -12,6 +12,7 @@ import Amenities from '../../components/Amenities'
 import Calendar from '../../components/Calendar'
 import SubmitButton from '../../components/SubmitButton'
 import { BookingContext } from '../../contexts'
+import useBackGround from '../../hook/useBackGround'
 
 const cx = classNames.bind(styles)
 
@@ -20,9 +21,8 @@ const RoomPage = ({ match, history }) => {
   const [booking, setBooking] = useState([])
   const [des, setDes] = useState({})
   const [success, setSuccess] = useState(false)
-  const [bgNum, setBgNum] = useState(0)
-  const [bgSrc, setBgSrc] = useState('')
   const [showBooking, setShowBooking] = useState(false)
+  const bgObj = useBackGround(room.imageUrl)
 
   //BookingContext
   const fmt = 'YYYY-MM-DD'
@@ -62,17 +62,6 @@ const RoomPage = ({ match, history }) => {
       }
     })()
   }, [match.params.id])
-
-  useEffect(() => {
-    if (room.imageUrl) {
-      room.imageUrl.forEach((imageUrl) => {
-        let img = new Image()
-        img.src = imageUrl
-      })
-
-      setBgSrc(room.imageUrl[bgNum])
-    }
-  }, [bgNum, room.imageUrl, room])
 
   useEffect(() => {
     let start = dayjs(state[0].startDate),
@@ -143,9 +132,13 @@ const RoomPage = ({ match, history }) => {
             <CSSTransition
               classNames="animation-fade"
               timeout={1000}
-              key={bgNum}
+              key={bgObj?.num}
             >
-              <img className={cx('bg')} src={bgSrc} alt={'background-image'} />
+              <img
+                className={cx('bg')}
+                src={bgObj?.src}
+                alt={'background-image'}
+              />
             </CSSTransition>
           </TransitionGroup>
           <Link to="/" className={cx('prePage')}>
@@ -165,8 +158,8 @@ const RoomPage = ({ match, history }) => {
             </div>
             <Carousel
               num={3}
-              variable={bgNum}
-              setVariable={setBgNum}
+              variable={bgObj?.num}
+              setVariable={bgObj?.setNum}
               color={'light-green'}
             />
           </div>

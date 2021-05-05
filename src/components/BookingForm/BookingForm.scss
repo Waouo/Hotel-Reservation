@@ -1,0 +1,93 @@
+.user {
+  &-info {
+    width: 40%;
+    background: rgb(56, 71, 11);
+    display: flex;
+    justify-content: center;
+    font: normal normal normal 14px/20px Noto Sans, CJK TC;
+    color: #ffffff;
+  }
+
+  &-container {
+    width: 100%;
+    height: 100%;
+    padding: 50px 65px 20px;
+  }
+
+  &-label {
+    display: block;
+    margin: 7px 0 7px;
+  }
+
+  &-input {
+    width: 100%;
+    height: 38px;
+    padding: 10px 8px 10px;
+    text-align: left;
+    display: block;
+    box-sizing: border-box;
+    font: normal normal 600 16px/22px Open Sans;
+    color: #6a6a6a;
+    background: white;
+    border: none;
+  }
+
+  &-button {
+    color: '';
+
+    &::after {
+      content: '▾';
+      position: absolute;
+      right: 0;
+      color: rgb(56, 71, 11);
+      font-size: 20px;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+.errorMessage {
+  height: 16px;
+  color: rgb(255, 1, 1);
+}
+
+.day {
+  padding-bottom: 20px;
+  border-bottom: rgba(148, 156, 151, 0.5) 1px solid;
+  color: rgb(148, 156, 151);
+}
+
+.price {
+  text-align: right;
+  color: white;
+  margin-bottom: 20px;
+
+  p:nth-child(2) {
+    font: normal normal 600 26px/36px Open Sans;
+  }
+}
+
+.remark {
+  margin-top: 18px;
+  text-align: center;
+  font: normal normal normal 12px/18px Open Sans;
+}
+
+.calendar {
+  position: relative;
+  display: var(--calendar-display, none);
+
+  :global {
+    .rdrCalendarWrapper {
+      position: absolute;
+      left: 330px;
+      top: -55px;
+      z-index: 1;
+      border: 1px solid black;
+    }
+  }
+}
+
+.display {
+  --calendar-display: true;
+}

@@ -9,6 +9,7 @@ const useBackGround = (imageUrl) => {
       imageUrl.forEach((imageUrl) => {
         let img = new Image()
         img.src = imageUrl
+        img.rel= 'preload'
       })
 
       setSrc(imageUrl[num])

@@ -2,17 +2,15 @@ import { useState } from 'react'
 import styles from './BookingPage.scss'
 import classNames from 'classnames/bind'
 import PropTypes from 'prop-types'
-import dayjs from 'dayjs'
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+import loadable from '@loadable/component'
 import Amenities from '../../components/Amenities'
-import BookingResult from '../../components/BookingResult'
 import BookingForm from '../../components/BookingForm'
 
-dayjs.extend(isSameOrAfter)
+const BookingResult = loadable(() => import('../../components/BookingResult'))
 
 const cx = classNames.bind(styles)
 
-const BookingPage = ({ showBooking, setShowBooking, room }) => {
+const BookingPage = ({ setShowBooking, room }) => {
   const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
 

@@ -18,15 +18,14 @@ const Calendar = loadable(() => import('../../components/Calendar'))
 
 const cx = classNames.bind(styles)
 
-const RoomPage = ({ match, history }) => {
-  const { room, booking, des, success } = useGetRoomDetails(match.params.id)
+const RoomPage = ({ match }) => {
+  const { room, booking, des } = useGetRoomDetails(match.params.id)
   const bgObj = useBackGround(room.imageUrl)
   const [showBooking, setShowBooking] = useState(false)
 
   //BookingContext
   const {
     dateArr,
-    weekArr,
     state,
     nightsObj,
     bookingArr,
@@ -67,7 +66,6 @@ const RoomPage = ({ match, history }) => {
           >
             <div className={cx('booking-page', { show: showBooking })}>
               <BookingPage
-                showBooking={showBooking}
                 setShowBooking={setShowBooking}
                 room={room}
                 history={history}

@@ -1,8 +1,6 @@
 import { useContext } from 'react'
 import styles from './Calendar.scss'
 import classNames from 'classnames/bind'
-import 'react-date-range/dist/styles.css' // main style file
-import 'react-date-range/dist/theme/default.css' // theme css file
 import { DateRange } from 'react-date-range'
 import { BookingContext } from '../../contexts'
 

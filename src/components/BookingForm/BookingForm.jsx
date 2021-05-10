@@ -9,10 +9,13 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { Calendar } from 'react-date-range'
 import dayjs from 'dayjs'
 import PropTypes from 'prop-types'
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 
 const cx = classNames.bind(styles)
 
 const fmt = 'YYYY - MM - DD'
+
+dayjs.extend(isSameOrAfter)
 
 const BookingForm = ({ roomId, setIsSuccess, setIsError }) => {
   const [isLoading, setIsLoading] = useState(false)

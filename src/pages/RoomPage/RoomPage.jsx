@@ -4,15 +4,17 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import classNames from 'classnames/bind'
 import styles from './RoomPage.scss'
 import PropTypes from 'prop-types'
-import BookingPage from '../BookingPage'
-import Carousel from '../../components/Carousel'
 import Amenities from '../../components/Amenities'
-import Calendar from '../../components/Calendar'
 import SubmitButton from '../../components/SubmitButton'
 import { BookingContext } from '../../contexts'
 import useBackGround from '../../hook/useBackGround'
 import useGetRoomDetails from '../../hook/useGetRoomDetails'
 import useCalendarStatus from '../../hook/useCalendarStatus'
+import loadable from '@loadable/component'
+
+const BookingPage = loadable(() => import('../BookingPage'))
+const Carousel = loadable(() => import('../../components/Carousel'))
+const Calendar = loadable(() => import('../../components/Calendar'))
 
 const cx = classNames.bind(styles)
 

@@ -5,8 +5,11 @@ import { CarouselContext } from '../../contexts'
 import bgImagesPath from './bgImagesPath'
 import Sidebar from '../../components/Sidebar'
 import Gallery from '../../components/Gallery'
-import Footer from '../../components/Footer'
+// import Footer from '../../components/Footer'
 import useBackGround from '../../hook/useBackGround'
+import loadable from '@loadable/component'
+
+const Footer = loadable(() => import('../../components/Footer'))
 
 const cx = classNames.bind(styles)
 

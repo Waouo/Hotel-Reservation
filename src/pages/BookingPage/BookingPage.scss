@@ -1,13 +1,4 @@
 .booking {
-  &-page {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 2;
-    display: var(--display, none);
-    backdrop-filter: blur(5px);
-  }
-
   &-container {
     border: 1px solid rgb(56, 71, 11);
     box-sizing: border-box;
@@ -17,13 +8,6 @@
     display: flex;
     flex-wrap: wrap;
   }
-}
-
-.show {
-  --display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(5px);
 }
 
 .exit {
@@ -38,7 +22,6 @@
 .light {
   --color: white;
 }
-
 
 /******** roomInfo ********/
 .booking-info {
@@ -129,5 +112,3 @@
       0% 0% no-repeat padding-box;
   }
 }
-
-

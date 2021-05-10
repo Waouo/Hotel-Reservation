@@ -65,12 +65,14 @@ const RoomPage = ({ match, history }) => {
             }}
             key={showBooking}
           >
-            <BookingPage
-              showBooking={showBooking}
-              setShowBooking={setShowBooking}
-              room={room}
-              history={history}
-            />
+            <div className={cx('booking-page', { show: showBooking })}>
+              <BookingPage
+                showBooking={showBooking}
+                setShowBooking={setShowBooking}
+                room={room}
+                history={history}
+              />
+            </div>
           </CSSTransition>
         </TransitionGroup>
 

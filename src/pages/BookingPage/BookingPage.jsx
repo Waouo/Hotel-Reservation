@@ -38,11 +38,16 @@ const BookingPage = ({ setShowBooking, room }) => {
         <BookingResult result={'error'} />
       ) : (
         <>
-          <BookingForm
-            roomId={room.id}
-            setIsSuccess={setIsSuccess}
-            setIsError={setIsError}
-          />
+          {room.id ? (
+            <BookingForm
+              roomId={room.id}
+              setIsSuccess={setIsSuccess}
+              setIsError={setIsError}
+            />
+          ) : (
+            ''
+          )}
+
           <section id="booking" className={cx('booking-info')}>
             <h1 className={cx('room-name')}>{room.name}</h1>
             <p>1人・ 單人床・附早餐・ 衛浴1間・18平方公尺</p>
@@ -102,7 +107,6 @@ const BookingPage = ({ setShowBooking, room }) => {
 }
 
 BookingPage.propTypes = {
-  showBooking: PropTypes.bool.isRequired,
   setShowBooking: PropTypes.func.isRequired,
   room: PropTypes.object.isRequired,
 }

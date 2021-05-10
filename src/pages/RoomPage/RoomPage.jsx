@@ -74,7 +74,7 @@ const RoomPage = ({ match }) => {
           </CSSTransition>
         </TransitionGroup>
         <div className={cx('room-container')}>
-          <section className={cx('panel')}>
+          <section className={cx('panel', 'col-md-5', 'col-12')}>
             <TransitionGroup component={null}>
               <CSSTransition
                 classNames="animation-fade"
@@ -111,19 +111,12 @@ const RoomPage = ({ match }) => {
               />
             </div>
           </section>
-          <main className={cx('info')}>
+          <main className={cx('info', ' col-md-7', 'col-12')}>
             <div className={cx('info-container')}>
               <h1 className={cx('room-name')}>
                 {room.name}
 
-                <span>
-                  {des.GuestMax === 1
-                    ? '1'
-                    : `${des.GuestMin || ''} ~ ${des.GuestMax || ''}`}
-                  人・ {des.Bed && `${des.Bed.length}`}張床・ 附早餐・衛浴
-                  {des['Private-Bath']}間・{des.Footage}
-                  平方公尺
-                </span>
+                
               </h1>
               <ul className={cx('time')}>
                 <li>

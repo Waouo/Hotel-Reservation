@@ -73,7 +73,7 @@ const RoomPage = ({ match }) => {
             </div>
           </CSSTransition>
         </TransitionGroup>
-        <div className={cx('room-container')}>
+        <div className={cx('room-container', 'row')}>
           <section className={cx('panel', 'col-md-5', 'col-12')}>
             <TransitionGroup component={null}>
               <CSSTransition
@@ -115,8 +115,14 @@ const RoomPage = ({ match }) => {
             <div className={cx('info-container')}>
               <h1 className={cx('room-name')}>
                 {room.name}
-
-                
+                <span>
+                  {(des.GuestMin === des.GuestMax) === 1
+                    ? '1'
+                    : `${des.GuestMin || ''} ~ ${des.GuestMax || ''}`}
+                  人・ {des.Bed && `${des.Bed.length}`}張床・ 附早餐・衛浴
+                  {des['Private-Bath']}間・{des.Footage}
+                  平方公尺
+                </span>
               </h1>
               <ul className={cx('time')}>
                 <li>
@@ -124,6 +130,15 @@ const RoomPage = ({ match }) => {
                   假日（五〜日）價格： ${room.holidayPrice}
                 </li>
                 <li>
+                  {' '}
+                  <span>
+                    {(des.GuestMin === des.GuestMax) === 1
+                      ? '1'
+                      : `${des.GuestMin} ~ ${des.GuestMax}`}
+                    人・ {des.Bed && `${des.Bed.length}`}張床・ 附早餐・衛浴
+                    {des['Private-Bath']}間・{des.Footage}
+                    平方公尺
+                  </span>
                   入住時間：
                   {room.checkInAndOut?.checkInEarly}
                   （最早）/ {room.checkInAndOut?.checkInLate}（最晚）

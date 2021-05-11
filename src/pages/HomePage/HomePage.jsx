@@ -28,7 +28,7 @@ const HomePage = () => {
         </CSSTransition>
       </TransitionGroup>
 
-      <div className={cx('home-container')}>
+      <div className={cx('home-container', 'row')}>
         <Sidebar />
         <Gallery />
         <CarouselContext.Provider

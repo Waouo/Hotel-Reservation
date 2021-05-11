@@ -18,8 +18,8 @@
   }
 
   @media (max-width: 1200px) {
-      margin-top: 20px;
-    }
+    margin-top: 20px;
+  }
 }
 
 .link {
@@ -41,6 +41,7 @@
   transition: all 0.4s ease;
 
   > span {
+    text-align: center;
     font: normal normal normal 19px/26px 'Open Sans';
     letter-spacing: 0px;
     color: white;

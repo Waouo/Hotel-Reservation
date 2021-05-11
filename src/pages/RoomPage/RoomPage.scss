@@ -20,9 +20,11 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    flex-wrap: wrap;
     font: normal normal 700 40px/55px Open Sans;
 
     > span {
+      padding: 10px;
       font: normal normal 600 14px/20px Noto Sans, CJK TC;
     }
   }

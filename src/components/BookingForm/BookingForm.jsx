@@ -58,7 +58,7 @@ const BookingForm = ({ roomId, setIsSuccess, setIsError }) => {
   }
 
   return (
-    <section className={cx('user-info')}>
+    <section className={cx('user-info', 'col-md-5', 'order-md-1','order-2')}>
       <Formik
         initialValues={{
           name: '',

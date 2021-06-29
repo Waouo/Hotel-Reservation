@@ -9,7 +9,7 @@ const Sidebar = () => {
       <picture>
         <img
           className={cx('logo')}
-          src="../../../public/images/logo.3fafe707.svg"
+          src={require("../../../public/images/logo.3fafe707.svg")}
           alt="hotel-log"
         />
       </picture>

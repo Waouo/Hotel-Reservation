@@ -22,8 +22,8 @@ const Amenities = ({ room, displayOnlyTrue, amenityStyle, type }) => {
             )}
             style={amenityStyle}
           >
-              <img src={`../../.././public/images/${amenity}.svg`} />
-              <p>{amenitiesCh[amenity]}</p>
+            <img src={require(`../../.././public/images/${amenity}.svg`)} />
+            <p>{amenitiesCh[amenity]}</p>
           </li>
         ))}
     </ul>

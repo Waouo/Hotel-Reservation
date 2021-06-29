@@ -4,6 +4,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const isDev = true
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const PreloadWebpackPlugin = require('preload-webpack-plugin')
+const webpack = require('webpack')
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 
 module.exports = {
   mode: 'development',
@@ -13,9 +18,22 @@ module.exports = {
     publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    assetModuleFilename: 'images/[name][ext]',
   },
   module: {
     rules: [
+      {
+        test: /\.(png|jpeg|gif|svg)$/i,
+        type: 'asset/resource',
+        // use: [
+        //   {
+        //     loader: 'file-loader',
+        //     options: {
+        //       name: './images/[name].[ext]',
+        //     },
+        //   },
+        // ],
+      },
       {
         test: /\.(s[ac]ss)$/i,
         use: [
@@ -54,24 +72,7 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.(png|jpe?g|gif|svg)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: { name: 'images/[name].[ext]' },
-          },
-        ],
-      },
-      {
-        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: { name: 'font/[name].[ext]' },
-          },
-        ],
-      },
+
       {
         test: /\.(js|jsx)$/i,
         exclude: /(node_modules)/,
@@ -82,15 +83,20 @@ module.exports = {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-    }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
     }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+    }),
+    new PreloadWebpackPlugin(),
     new CleanWebpackPlugin(),
     new Dotenv(),
+    //分析網頁使用資料大小
+    new webpack.HotModuleReplacementPlugin(),
+    new WebpackManifestPlugin(),
+    // new BundleAnalyzerPlugin(),
   ],
   devServer: {
     port: 8000,

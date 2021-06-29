@@ -1,18 +1,21 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import styles from './BookingPage.scss'
 import classNames from 'classnames/bind'
-import PropTypes from 'prop-types'
 import loadable from '@loadable/component'
 import Amenities from '../../components/Amenities'
 import BookingForm from '../../components/BookingForm'
+import { RoomsContext } from '../../contexts'
+import RoomSize from '../../components/RoomSize'
 
 const BookingResult = loadable(() => import('../../components/BookingResult'))
 
 const cx = classNames.bind(styles)
 
-const BookingPage = ({ setShowBooking, room }) => {
+const BookingPage = () => {
   const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
+
+  const { room, setShowBooking } = useContext(RoomsContext)
 
   const handleExit = () => {
     setShowBooking(false)
@@ -25,7 +28,7 @@ const BookingPage = ({ setShowBooking, room }) => {
   }
 
   return (
-    <div className={cx('booking-container')}>
+    <div className={cx('booking-container', 'row')}>
       <button
         className={cx('exit', { light: isSuccess || isError })}
         onClick={handleExit}
@@ -48,9 +51,12 @@ const BookingPage = ({ setShowBooking, room }) => {
             ''
           )}
 
-          <section id="booking" className={cx('booking-info')}>
+          <section
+            id="booking"
+            className={cx('booking-info', 'col-md-7', 'order-md-2', 'order-1')}
+          >
             <h1 className={cx('room-name')}>{room.name}</h1>
-            <p>1人・ 單人床・附早餐・ 衛浴1間・18平方公尺</p>
+            <p><RoomSize/></p>
             <p style={{ marginTop: '10px' }}>
               平日（一～四）價格：{room.normalDayPrice} / 假日（五〜日）價格：
               {room.holidayPrice}
@@ -76,8 +82,9 @@ const BookingPage = ({ setShowBooking, room }) => {
                 <div className={cx('flow-chart-icon-bg')}>
                   <img src="../../../public/images/note.svg" />
                 </div>
-                <div className={cx('flow-chart-des')}>送出線上預約單</div>
+                <p className={cx('flow-chart-des')}>送出線上預約單</p>
               </div>
+              <img src="../../../public/images/flow-chart-arrow.svg" />
               <div className={cx('flow-chart-item', 'arrow')}>
                 <div className={cx('flow-chart-icon-bg')}>
                   <img src="../../../public/images/search.svg" />
@@ -88,6 +95,7 @@ const BookingPage = ({ setShowBooking, room }) => {
                   <p> (若未收到簡訊請來電確認)</p>
                 </div>
               </div>
+              <img src="../../../public/images/flow-chart-arrow.svg" />
               <div className={cx('flow-chart-item')}>
                 <div className={cx('flow-chart-icon-bg')}>
                   <img src="../../../public/images/pay.svg" />
@@ -102,13 +110,8 @@ const BookingPage = ({ setShowBooking, room }) => {
           </section>
         </>
       )}
-    </div>
+    </div>     
   )
-}
-
-BookingPage.propTypes = {
-  setShowBooking: PropTypes.func.isRequired,
-  room: PropTypes.object.isRequired,
 }
 
 export default BookingPage

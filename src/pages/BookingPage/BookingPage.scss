@@ -2,7 +2,7 @@
   &-container {
     border: 1px solid rgb(56, 71, 11);
     box-sizing: border-box;
-    width: 1100px;
+    width: 90%;
     min-height: 600px;
     position: relative;
     display: flex;
@@ -12,8 +12,10 @@
 
 .exit {
   position: absolute;
+  width: auto;
   top: 23px;
   right: 35px;
+  z-index: 1;
   background-color: rgba(255, 255, 255, 0);
   color: var(--color, rgb(56, 71, 11));
   border: none;
@@ -25,7 +27,6 @@
 
 /******** roomInfo ********/
 .booking-info {
-  width: 60%;
   height: 100%;
   padding: 51px 30px 26px;
   box-sizing: border-box;
@@ -72,11 +73,19 @@
   }
 
   &-item {
-    width: 160px;
+    width: 25%;
     height: 136px;
     position: relative;
     display: flex;
     flex-direction: column;
+
+    @media (max-width:1220px){
+      height: 170px;
+    }
+
+    @media (max-width:576px){
+      height: 200px;
+    }
   }
 
   &-icon-bg {
@@ -91,24 +100,12 @@
   &-des {
     width: 100%;
     height: 65%;
-    padding-top: 12px;
+    padding: 12px 0;
     text-align: center;
-    font: normal normal normal 12px/18px Noto Sans, CJK TC;
+    font: normal normal normal 1.8vmin/3.8vmin Noto Sans, CJK TC;
     border: 1px solid rgb(148, 156, 151);
     border-radius: 0 0 10px 10px;
     box-sizing: border-box;
   }
 }
 
-.arrow {
-  &::after {
-    content: '';
-    width: 7px;
-    height: 20px;
-    left: 187px;
-    top: 15px;
-    position: absolute;
-    background: transparent url('../../../public/images/flow-chart-arrow.svg')
-      0% 0% no-repeat padding-box;
-  }
-}

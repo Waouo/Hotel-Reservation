@@ -6,7 +6,8 @@ import styles from './RoomPage.scss'
 import PropTypes from 'prop-types'
 import Amenities from '../../components/Amenities'
 import SubmitButton from '../../components/SubmitButton'
-import { BookingContext } from '../../contexts'
+import RoomSize from '../../components/RoomSize'
+import { BookingContext, RoomsContext } from '../../contexts'
 import useBackGround from '../../hook/useBackGround'
 import useGetRoomDetails from '../../hook/useGetRoomDetails'
 import useCalendarStatus from '../../hook/useCalendarStatus'
@@ -19,9 +20,11 @@ const Calendar = loadable(() => import('../../components/Calendar'))
 const cx = classNames.bind(styles)
 
 const RoomPage = ({ match }) => {
+  //RoomsContext
   const { room, booking, des } = useGetRoomDetails(match.params.id)
-  const bgObj = useBackGround(room.imageUrl)
   const [showBooking, setShowBooking] = useState(false)
+
+  const bgObj = useBackGround(room.imageUrl)
 
   //BookingContext
   const {
@@ -53,23 +56,20 @@ const RoomPage = ({ match }) => {
         totalPrice,
       }}
     >
-      <div className={cx('room-details')}>
-        <TransitionGroup component={null}>
-          <CSSTransition
-            classNames="animation-fade"
-            timeout={{
-              appear: 1000,
-              enter: 1000,
-              exit: 0,
-            }}
-            key={showBooking}
-          >
-            <div className={cx('booking-page', { show: showBooking })}>
-              <BookingPage
-                setShowBooking={setShowBooking}
-                room={room}
-                history={history}
-              />
+      <RoomsContext.Provider value={{ room, des, setShowBooking }}>
+        <div className={cx('room-details')}>
+          <TransitionGroup component={null}>
+            <CSSTransition
+              classNames="animation-fade"
+              timeout={{
+                appear: 1000,
+                enter: 1000,
+                exit: 0,
+              }}
+              key={showBooking}
+            >
+              <div className={cx('booking-page', { show: showBooking })}>
+                <BookingPage />
             </div>
           </CSSTransition>
         </TransitionGroup>
@@ -115,14 +115,7 @@ const RoomPage = ({ match }) => {
             <div className={cx('info-container')}>
               <h1 className={cx('room-name')}>
                 {room.name}
-                <span>
-                  {(des.GuestMin === des.GuestMax) === 1
-                    ? '1'
-                    : `${des.GuestMin || ''} ~ ${des.GuestMax || ''}`}
-                  人・ {des.Bed && `${des.Bed.length}`}張床・ 附早餐・衛浴
-                  {des['Private-Bath']}間・{des.Footage}
-                  平方公尺
-                </span>
+                <RoomSize />
               </h1>
               <ul className={cx('time')}>
                 <li>
@@ -131,14 +124,9 @@ const RoomPage = ({ match }) => {
                 </li>
                 <li>
                   {' '}
-                  <span>
-                    {(des.GuestMin === des.GuestMax) === 1
-                      ? '1'
-                      : `${des.GuestMin} ~ ${des.GuestMax}`}
-                    人・ {des.Bed && `${des.Bed.length}`}張床・ 附早餐・衛浴
-                    {des['Private-Bath']}間・{des.Footage}
-                    平方公尺
-                  </span>
+                  <RoomSize />
+                </li>
+                <li>
                   入住時間：
                   {room.checkInAndOut?.checkInEarly}
                   （最早）/ {room.checkInAndOut?.checkInLate}（最晚）
@@ -170,6 +158,7 @@ const RoomPage = ({ match }) => {
           </main>
         </div>
       </div>
+      </RoomsContext.Provider>
     </BookingContext.Provider>
   )
 }

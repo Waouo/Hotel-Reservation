@@ -4,6 +4,7 @@ import validationSchema from './validationSchema'
 import { BookingContext } from '../../contexts'
 import { reservedRoomApi } from '../../Api/room'
 import SubmitButton from '../../components/SubmitButton'
+import Loader from '../../components/Loader'
 import classNames from 'classnames/bind'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { Calendar } from 'react-date-range'
@@ -11,11 +12,7 @@ import dayjs from 'dayjs'
 import PropTypes from 'prop-types'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import { useParams } from 'react-router'
-import {
-  CSSTransition,
-  Transition,
-  TransitionGroup,
-} from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group'
 
 const cx = classNames.bind(styles)
 
@@ -62,18 +59,6 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
   const handleEndCalendar = () => {
     setShowEndCalendar(!showEndCalendar)
     setShowStartCalendar(false)
-  }
-
-  const defaultStyle = {
-    transition: `opacity ${100}ms ease-in-out`,
-    opacity: 0,
-  }
-
-  const transitionStyles = {
-    entering: { opacity: 1 },
-    entered: { opacity: 1 },
-    exiting: { opacity: 0 },
-    exited: { opacity: 0 },
   }
 
   return (
@@ -206,13 +191,16 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
             <div className={cx('price')}>
               <p>總計 ${totalPrice}</p>
             </div>
-            <SubmitButton them={'border-light'}>確認送出</SubmitButton>
-            <div className={cx('remark')}>
-              {isLoading
-                ? '處理中...'
-                : '此預約系統僅預約功能，並不會對您進行收費'}
-            </div>
-            <div className={cx('remark')}></div>
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <>
+                <SubmitButton them={'border-light'}>確認送出</SubmitButton>
+                <div className={cx('remark')}>
+                  此預約系統僅預約功能，並不會對您進行收費
+                </div>
+              </>
+            )}
           </Form>
         )}
       </Formik>

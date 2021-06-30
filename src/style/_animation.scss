@@ -5,21 +5,25 @@
 
   .animation-forward-enter {
     opacity: 0;
+    display: none;
     transform: translateX(100%);
   }
 
   .animation-forward-enter-active {
     opacity: 0.8;
+    display: block;
     transform: translateX(0);
     transition: $forwardTransitionTime all ease-in-out;
   }
 
   .animation-forward-exit {
     opacity: 0.8;
+    display: block;
     transform: translateX(0);
   }
 
   .animation-forward-exit-active {
+    display: none;
     opacity: 0;
     transform: translateX(-100%);
     transition: $forwardTransitionTime all ease-in-out;

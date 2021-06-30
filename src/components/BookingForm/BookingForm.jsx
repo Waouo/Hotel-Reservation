@@ -11,6 +11,11 @@ import dayjs from 'dayjs'
 import PropTypes from 'prop-types'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import { useParams } from 'react-router'
+import {
+  CSSTransition,
+  Transition,
+  TransitionGroup,
+} from 'react-transition-group'
 
 const cx = classNames.bind(styles)
 
@@ -59,8 +64,20 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
     setShowStartCalendar(false)
   }
 
+  const defaultStyle = {
+    transition: `opacity ${100}ms ease-in-out`,
+    opacity: 0,
+  }
+
+  const transitionStyles = {
+    entering: { opacity: 1 },
+    entered: { opacity: 1 },
+    exiting: { opacity: 0 },
+    exited: { opacity: 0 },
+  }
+
   return (
-    <section className={cx('user-info', 'col-md-5', 'order-md-1','order-2')}>
+    <section className={cx('user-info', 'col-md-5', 'order-md-1', 'order-2')}>
       <Formik
         initialValues={{
           name: '',
@@ -131,20 +148,23 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
                 {state[0].startDate && dayjs(state[0].startDate).format(fmt)}
               </button>
               <div className={cx('errorMessage')}></div>
-              <div
-                className={cx('calendar', {
-                  display: showStartCalendar,
-                })}
+              <CSSTransition
+                in={showStartCalendar}
+                classNames="animation-fade"
+                timeout={1000}
+                unmountOnExit
               >
-                <Calendar
-                  minDate={tomorrow.toDate()}
-                  maxDate={tomorrow.add(89, 'day').toDate()}
-                  color="rgba(148, 156, 124, 0.8)"
-                  date={state[0].startDate}
-                  disabledDates={bookingArr}
-                  onChange={(item) => setStartDate(item)}
-                ></Calendar>
-              </div>
+                <div className={cx('calendar')}>
+                  <Calendar
+                    minDate={tomorrow.toDate()}
+                    maxDate={tomorrow.add(89, 'day').toDate()}
+                    color="rgba(148, 156, 124, 0.8)"
+                    date={state[0].startDate}
+                    disabledDates={bookingArr}
+                    onChange={(item) => setStartDate(item)}
+                  ></Calendar>
+                </div>
+              </CSSTransition>
             </div>
             <div style={{ position: 'relative' }}>
               <label className={cx('user-label')}>退房日期</label>
@@ -156,17 +176,25 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
                 {state[0].endDate && dayjs(state[0].endDate).format(fmt)}
               </button>
               <div className={cx('errorMessage')}></div>
-              <div className={cx('calendar', { display: showEndCalendar })}>
-                <Calendar
-                  className={cx('calendar')}
-                  minDate={dayjs(state[0].startDate).add(1, 'day').toDate()}
-                  maxDate={tomorrow.add(89, 'day').toDate()}
-                  color="rgba(148, 156, 124, 0.8)"
-                  date={state[0].endDate}
-                  disabledDates={bookingArr}
-                  onChange={(item) => setEndDate(item)}
-                ></Calendar>
-              </div>
+
+              <CSSTransition
+                in={showEndCalendar}
+                classNames="animation-fade"
+                timeout={1000}
+                unmountOnExit
+              >
+                <div className={cx('calendar', { display: showEndCalendar })}>
+                  <Calendar
+                    className={cx('calendar')}
+                    minDate={dayjs(state[0].startDate).add(1, 'day').toDate()}
+                    maxDate={tomorrow.add(89, 'day').toDate()}
+                    color="rgba(148, 156, 124, 0.8)"
+                    date={state[0].endDate}
+                    disabledDates={bookingArr}
+                    onChange={(item) => setEndDate(item)}
+                  ></Calendar>
+                </div>
+              </CSSTransition>
             </div>
             <div className={cx('day')}>
               {nightsObj.normal + nightsObj.holiday}天，
@@ -193,7 +221,6 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
 }
 
 BookingForm.propTypes = {
-  roomId: PropTypes.string.isRequired,
   setIsSuccess: PropTypes.func.isRequired,
   setIsError: PropTypes.func.isRequired,
 }

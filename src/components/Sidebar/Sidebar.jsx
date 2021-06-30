@@ -5,7 +5,7 @@ const cx = classNames.bind(styles)
 
 const Sidebar = () => {
   return (
-    <header className={cx('sidebar', 'col-12 col-xl-3')}>
+    <header className={cx('sidebar', 'col-12',' col-xl-3')}>
       <picture>
         <img
           className={cx('logo')}

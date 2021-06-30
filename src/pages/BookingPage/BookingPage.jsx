@@ -24,7 +24,7 @@ const BookingPage = () => {
     setTimeout(() => {
       setIsSuccess(false)
       setIsError(false)
-    }, 100)
+    }, 1000)
   }
 
   return (

@@ -140,12 +140,7 @@
   height: 100%;
   position: absolute;
   z-index: 2;
-  display: var(--display, none);
-  backdrop-filter: blur(5px);
-}
-
-.show {
-  --display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(5px);

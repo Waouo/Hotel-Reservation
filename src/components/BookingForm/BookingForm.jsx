@@ -10,6 +10,7 @@ import { Calendar } from 'react-date-range'
 import dayjs from 'dayjs'
 import PropTypes from 'prop-types'
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
+import { useParams } from 'react-router'
 
 const cx = classNames.bind(styles)
 
@@ -17,10 +18,11 @@ const fmt = 'YYYY - MM - DD'
 
 dayjs.extend(isSameOrAfter)
 
-const BookingForm = ({ roomId, setIsSuccess, setIsError }) => {
+const BookingForm = ({ setIsSuccess, setIsError }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [showStartCalendar, setShowStartCalendar] = useState(false)
   const [showEndCalendar, setShowEndCalendar] = useState(false)
+  let { id } = useParams()
 
   const {
     state,
@@ -72,7 +74,7 @@ const BookingForm = ({ roomId, setIsSuccess, setIsError }) => {
           const data = JSON.stringify({ ...values, date: dateArr })
 
           try {
-            await reservedRoomApi(roomId, data)
+            await reservedRoomApi(id, data)
             setIsSuccess(true)
           } catch (error) {
             setIsError(true)

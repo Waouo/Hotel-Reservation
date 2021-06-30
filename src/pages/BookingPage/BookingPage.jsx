@@ -41,22 +41,15 @@ const BookingPage = () => {
         <BookingResult result={'error'} />
       ) : (
         <>
-          {room.id ? (
-            <BookingForm
-              roomId={room.id}
-              setIsSuccess={setIsSuccess}
-              setIsError={setIsError}
-            />
-          ) : (
-            ''
-          )}
-
+          <BookingForm setIsSuccess={setIsSuccess} setIsError={setIsError} />
           <section
             id="booking"
             className={cx('booking-info', 'col-md-7', 'order-md-2', 'order-1')}
           >
             <h1 className={cx('room-name')}>{room.name}</h1>
-            <p><RoomSize/></p>
+            <p>
+              <RoomSize />
+            </p>
             <p style={{ marginTop: '10px' }}>
               平日（一～四）價格：{room.normalDayPrice} / 假日（五〜日）價格：
               {room.holidayPrice}
@@ -89,28 +82,28 @@ const BookingPage = () => {
                 <div className={cx('flow-chart-icon-bg')}>
                   <img src="../../../public/images/search.svg" />
                 </div>
-                <div className={cx('flow-chart-des')}>
-                  <p>系統立即回覆是否預訂成功</p>
-                  <p>並以簡訊發送訂房通知</p>
-                  <p> (若未收到簡訊請來電確認)</p>
-                </div>
+                <ul className={cx('flow-chart-des')}>
+                  <li>系統立即回覆是否預訂成功</li>
+                  <li>並以簡訊發送訂房通知</li>
+                  <li> (若未收到簡訊請來電確認)</li>
+                </ul>
               </div>
               <img src="../../../public/images/flow-chart-arrow.svg" />
               <div className={cx('flow-chart-item')}>
                 <div className={cx('flow-chart-icon-bg')}>
                   <img src="../../../public/images/pay.svg" />
                 </div>
-                <div className={cx('flow-chart-des')}>
-                  <p>入住當日憑訂房通知</p>
-                  <p>以現金或刷卡付款即可</p>
-                  <p>(僅接受VISA.JCB.銀聯卡)</p>
-                </div>
+                <ul className={cx('flow-chart-des')}>
+                  <li>入住當日憑訂房通知</li>
+                  <li>以現金或刷卡付款即可</li>
+                  <li>(僅接受VISA.JCB.銀聯卡)</li>
+                </ul>
               </div>
             </div>
           </section>
         </>
       )}
-    </div>     
+    </div>
   )
 }
 

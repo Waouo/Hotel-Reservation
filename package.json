@@ -7,7 +7,7 @@
     "start": "node server/server",
     "build": "webpack --mode development  --progress",
     "dev": "npx webpack-cli serve",
-    "heroku-postbuild": "npm install && npm run build"
+    "heroku-postbuild": "npm install --prefix server && npm run build"
   },
   "keywords": [],
   "author": "",

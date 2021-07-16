@@ -24,6 +24,8 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [showStartCalendar, setShowStartCalendar] = useState(false)
   const [showEndCalendar, setShowEndCalendar] = useState(false)
+  
+
   let { id } = useParams()
 
   const {
@@ -100,6 +102,7 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
               type="text"
               maxLength={20}
               className={cx('user-input')}
+              autoFocus={true}
             />
             <div className={cx('errorMessage')}>
               <ErrorMessage name="name" />

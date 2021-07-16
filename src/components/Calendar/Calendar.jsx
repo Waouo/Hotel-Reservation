@@ -3,6 +3,8 @@ import styles from './Calendar.scss'
 import classNames from 'classnames/bind'
 import { DateRange } from 'react-date-range'
 import { BookingContext } from '../../contexts'
+import 'react-date-range/dist/styles.css' // main style file
+import 'react-date-range/dist/theme/default.css' // theme css file
 
 const cx = classNames.bind(styles)
 

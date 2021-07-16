@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/server",
-    "build": "webpack --mode development  --progress",
+    "build": "webpack --mode production  --progress",
     "dev": "npx webpack-cli serve",
     "heroku-postbuild": "npm install --prefix server && npm run build"
   },

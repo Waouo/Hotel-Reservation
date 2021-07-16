@@ -92,7 +92,7 @@ module.exports = {
     }),
     new PreloadWebpackPlugin(),
     new CleanWebpackPlugin(),
-    new Dotenv(),
+    new Dotenv({ path: '../.env' }),
     //分析網頁使用資料大小
     new webpack.HotModuleReplacementPlugin(),
     new WebpackManifestPlugin(),

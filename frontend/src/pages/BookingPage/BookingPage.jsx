@@ -73,14 +73,14 @@ const BookingPage = () => {
             <div className={cx('flow-chart-container')}>
               <div className={cx('flow-chart-item', 'arrow')}>
                 <div className={cx('flow-chart-icon-bg')}>
-                  <img src="../../../public/images/note.svg" />
+                  <img src={require('../../../public/images/note.svg')} />
                 </div>
                 <p className={cx('flow-chart-des')}>送出線上預約單</p>
               </div>
-              <img src="../../../public/images/flow-chart-arrow.svg" />
+              <img src={require("../../../public/images/flow-chart-arrow.svg")} />
               <div className={cx('flow-chart-item', 'arrow')}>
                 <div className={cx('flow-chart-icon-bg')}>
-                  <img src="../../../public/images/search.svg" />
+                  <img src={require('../../../public/images/search.svg')} />
                 </div>
                 <ul className={cx('flow-chart-des')}>
                   <li>系統立即回覆是否預訂成功</li>
@@ -88,10 +88,12 @@ const BookingPage = () => {
                   <li> (若未收到簡訊請來電確認)</li>
                 </ul>
               </div>
-              <img src="../../../public/images/flow-chart-arrow.svg" />
+              <img
+                src={require('../../../public/images/flow-chart-arrow.svg')}
+              />
               <div className={cx('flow-chart-item')}>
                 <div className={cx('flow-chart-icon-bg')}>
-                  <img src="../../../public/images/pay.svg" />
+                  <img src={require('../../../public/images/pay.svg')} />
                 </div>
                 <ul className={cx('flow-chart-des')}>
                   <li>入住當日憑訂房通知</li>

@@ -88,7 +88,7 @@ const RoomPage = ({ match }) => {
                   </h2>
                   <a href="#booking" style={{ margin: '0 auto' }}>
                     <SubmitButton onClick={() => setShowBooking(true)}>
-                      Booking now
+                      預約房間
                     </SubmitButton>
                   </a>
                 </div>

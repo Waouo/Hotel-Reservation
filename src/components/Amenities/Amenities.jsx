@@ -5,13 +5,13 @@ import amenitiesCh from './amenities-Ch'
 
 const cx = classNames.bind(styles)
 
-const Amenities = ({ room, displayOnlyTrue, amenityStyle, type }) => {
+const Amenities = ({ room, displayOnlyTrue, type }) => {
   return (
     <ul className={cx('amenities')}>
       {room.amenities &&
-        Object.keys(room.amenities).map((amenity, idx) => (
+        Object.keys(room.amenities).map((amenity) => (
           <li
-            key={idx}
+            key={amenity}
             className={cx(
               'amenity',
               { [`${type}`]: type },
@@ -20,7 +20,6 @@ const Amenities = ({ room, displayOnlyTrue, amenityStyle, type }) => {
               },
               { display__none: !room.amenities[amenity] && displayOnlyTrue }
             )}
-            style={amenityStyle}
           >
             <img src={require(`../../.././public/images/${amenity}.svg`)} />
             <p>{amenitiesCh[amenity]}</p>
@@ -33,7 +32,6 @@ const Amenities = ({ room, displayOnlyTrue, amenityStyle, type }) => {
 Amenities.propTypes = {
   room: PropTypes.object.isRequired,
   displayOnlyTrue: PropTypes.bool,
-  amenityStyle: PropTypes.object,
   type: PropTypes.string,
 }
 

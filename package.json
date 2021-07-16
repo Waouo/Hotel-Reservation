@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node server/server",
     "build": "webpack --mode development  --progress",
-    "start": "npx webpack-cli serve",
+    "dev": "npx webpack-cli serve",
     "heroku-postbuild": "npm install && npm run build"
   },
   "keywords": [],

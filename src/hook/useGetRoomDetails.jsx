@@ -12,7 +12,6 @@ const useGetRoomDetails = (matchParamsId) => {
     async function getRoomDetails() {
       try {
         const { data } = await getRoomDetailsApi(matchParamsId)
-        console.log(data.room[0])
         setRoom(data.room[0])
         setDes(data.room[0].descriptionShort)
         setBooking(data.booking)

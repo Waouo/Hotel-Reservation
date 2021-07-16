@@ -9,10 +9,6 @@ const cx = classNames.bind(styles)
 const Gallery = () => {
   const { rooms, success } = useContext(RoomsContext)
 
-  useEffect(() => {
-    console.log('Gallery', rooms)
-  })
-
   return (
     <section className={cx('gallery', 'col-12 ', 'col-xl-9')}>
       {success ? (

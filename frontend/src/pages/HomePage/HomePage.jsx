@@ -23,7 +23,7 @@ const HomePage = () => {
           timeout={1000}
           key={bgObj?.num}
         >
-          <img className={cx('bg')} src={bgObj?.src} />
+          <img className={cx('bg-img')} src={bgObj?.src} />
         </CSSTransition>
       </TransitionGroup>
 

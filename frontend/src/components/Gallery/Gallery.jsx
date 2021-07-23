@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { RoomsContext } from '../../contexts'
 import styles from './Gallery.scss'
@@ -13,13 +13,17 @@ const Gallery = () => {
     <section className={cx('gallery', 'col-12 ', 'col-xl-9')}>
       {success ? (
         Array.from(rooms).map((room) => (
-          <Link key={room.id} to={`room/${room.id}`} className={cx('link')}>
+          <Link
+            key={room.id}
+            to={`room/${room.id}`}
+            className={cx('gallery-item')}
+          >
             <img
               src={room.imageUrl}
               alt={room.name}
               className={cx('gallery-image')}
             />
-            <span className={cx('hover')}>
+            <span className={cx('gallery-hover')}>
               <span>{room.name}</span>
             </span>
           </Link>

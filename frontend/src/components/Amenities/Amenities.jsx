@@ -14,11 +14,11 @@ const Amenities = ({ room, displayOnlyTrue, type }) => {
             key={amenity}
             className={cx(
               'amenity',
-              { [`${type}`]: type },
+              { [type]: type },
               {
-                ok: room.amenities[amenity],
+                'amenity-ok': room.amenities[amenity],
               },
-              { display__none: !room.amenities[amenity] && displayOnlyTrue }
+              { 'display-none': !room.amenities[amenity] && displayOnlyTrue }
             )}
           >
             <img src={require(`../../.././public/images/${amenity}.svg`)} />

@@ -1,6 +1,8 @@
+@import '../../style/_variable.scss';
+
 .user {
   &-info {
-    background: rgb(56, 71, 11);
+    background: $theme-color;
     display: flex;
     justify-content: center;
     font: normal normal normal 14px/20px Noto Sans, CJK TC;
@@ -38,7 +40,7 @@
       content: '▾';
       position: absolute;
       right: 0;
-      color: rgb(56, 71, 11);
+      color: $theme-color;
       font-size: 20px;
       transform: translateY(-1px);
     }
@@ -52,8 +54,8 @@
 
 .day {
   padding-bottom: 20px;
-  border-bottom: rgba(148, 156, 151, 0.5) 1px solid;
-  color: rgb(148, 156, 151);
+  border-bottom: rgba($theme-color-light, 0.5) 1px solid;
+  color: $theme-color-light;
 }
 
 .price {

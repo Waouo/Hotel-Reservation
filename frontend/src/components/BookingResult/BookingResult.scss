@@ -1,3 +1,5 @@
+@import '../../style/_variable.scss';
+
 .booking-result {
   width: 100%;
   min-height: 600px;
@@ -5,19 +7,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(56, 71, 11);
+  background-color: $theme-color;
   color: white;
 
-  > img {
+  &-img {
     margin-bottom: 40px;
   }
 
-  > h1 {
+  &-title {
     font: normal normal 500 50px/74px Noto Sans, CJK TC;
     margin-bottom: 40px;
   }
 
-  > p {
+  &-desc {
     font: normal normal 300 18px/30px Noto Sans, CJK TC;
   }
 }

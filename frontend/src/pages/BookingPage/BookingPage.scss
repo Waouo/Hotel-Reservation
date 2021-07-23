@@ -1,6 +1,8 @@
+@import '../../style/_variable.scss';
+
 .booking {
   &-container {
-    border: 1px solid rgb(56, 71, 11);
+    border: 1px solid $theme-color;
     box-sizing: border-box;
     width: 90%;
     min-height: 600px;
@@ -17,7 +19,7 @@
   right: 35px;
   z-index: 1;
   background-color: rgba(255, 255, 255, 0);
-  color: var(--color, rgb(56, 71, 11));
+  color: var(--color, $theme-color);
   border: none;
 }
 
@@ -31,7 +33,7 @@
   padding: 51px 30px 26px;
   box-sizing: border-box;
   background: #ffffff;
-  color: rgb(56, 71, 11);
+  color: $theme-color;
 }
 
 .room {
@@ -60,7 +62,7 @@
   &::after {
     content: '';
     flex: 1 1;
-    border-bottom: 1px solid rgb(148, 156, 151, 0.5);
+    border-bottom: 1px solid rgb($theme-color-light, 0.5);
     margin: auto auto auto 10px;
   }
 }
@@ -79,11 +81,11 @@
     display: flex;
     flex-direction: column;
 
-    @media (max-width:1220px){
+    @media (max-width: 1220px) {
       height: 170px;
     }
 
-    @media (max-width:576px){
+    @media (max-width: 576px) {
       height: 200px;
     }
   }
@@ -94,7 +96,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgb(148, 156, 124) 0% 0% no-repeat padding-box;
+    background: $theme-color 0% 0% no-repeat padding-box;
   }
 
   &-des {
@@ -103,9 +105,8 @@
     padding: 12px 0;
     text-align: center;
     font: normal normal normal 1.8vmin/3.8vmin Noto Sans, CJK TC;
-    border: 1px solid rgb(148, 156, 151);
+    border: 1px solid $theme-color-light;
     border-radius: 0 0 10px 10px;
     box-sizing: border-box;
   }
 }
-

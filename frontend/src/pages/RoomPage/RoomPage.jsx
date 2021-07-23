@@ -51,7 +51,7 @@ const RoomPage = ({ match }) => {
       }}
     >
       <RoomsContext.Provider value={{ room, des, setShowBooking }}>
-        <div className={cx('room-details')}>
+        <div className={cx('room-page')}>
           <CSSTransition
             in={showBooking}
             classNames="animation-fade"
@@ -62,8 +62,8 @@ const RoomPage = ({ match }) => {
               <BookingPage />
             </div>
           </CSSTransition>
-          <div className={cx('room-container', 'row')}>
-            <section className={cx('panel', 'col-md-5', 'col-12')}>
+          <div className={cx('room-page-container', 'row')}>
+            <section className={cx('carousel-section', 'col-md-5', 'col-12')}>
               <TransitionGroup component={null}>
                 <CSSTransition
                   classNames="animation-fade"
@@ -71,7 +71,7 @@ const RoomPage = ({ match }) => {
                   key={bgObj?.num}
                 >
                   <img
-                    className={cx('bg')}
+                    className={cx('bg-img')}
                     src={bgObj?.src}
                     alt={'background-image'}
                   />
@@ -100,13 +100,13 @@ const RoomPage = ({ match }) => {
                 />
               </div>
             </section>
-            <main className={cx('info', ' col-md-7', 'col-12')}>
-              <div className={cx('info-container')}>
+            <main className={cx('room', ' col-md-7', 'col-12')}>
+              <div className={cx('room-container')}>
                 <h1 className={cx('room-name')}>
                   {room.name}
                   <RoomSize />
                 </h1>
-                <ul className={cx('time')}>
+                <ul className={cx('room-time')}>
                   <li>
                     平日（一～四）價格：${room.normalDayPrice} /
                     假日（五〜日）價格： ${room.holidayPrice}
@@ -117,12 +117,15 @@ const RoomPage = ({ match }) => {
                   </li>
                   <li>
                     入住時間：
-                    {room.checkInAndOut?.checkInEarly}
-                    （最早）/ {room.checkInAndOut?.checkInLate}（最晚）
+                    <time>{room.checkInAndOut?.checkInEarly}</time>
+                    （最早）/ <time>{room.checkInAndOut?.checkInLate}</time>
+                    （最晚）
                   </li>
-                  <li>退房時間：{room.checkInAndOut?.checkOut}</li>
+                  <li>
+                    退房時間：<time>{room.checkInAndOut?.checkOut}</time>
+                  </li>
                 </ul>
-                <ul className={cx('description')}>
+                <ul className={cx('room-desc')}>
                   <li>
                     {room.name}{' '}
                     {des.GuestMax === 1

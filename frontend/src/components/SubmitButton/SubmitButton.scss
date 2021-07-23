@@ -1,13 +1,15 @@
+@import '../../style/_variable.scss';
+
 .submit-button {
   width: 100%;
   height: 44px;
-  background-color: #38470b;
+  background-color: $theme-color;
   color: white;
   font-weight: 600;
   border: var(--border, none);
 
   &:hover {
-    background-color: rgb(148, 156, 151);
+    background-color: $theme-color-light;
   }
 }
 

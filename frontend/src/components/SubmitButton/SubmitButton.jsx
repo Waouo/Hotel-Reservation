@@ -8,7 +8,7 @@ const SubmitButton = ({ them, children, onClick }) => {
   return (
     <button
       type="submit"
-      className={cx('submit-button', { [`${them}`]: !!them })}
+      className={cx('submit-button', { [them]: !!them })}
       onClick={onClick}
     >
       {children}
@@ -18,7 +18,6 @@ const SubmitButton = ({ them, children, onClick }) => {
 
 SubmitButton.propTypes = {
   them: PropTypes.string,
-  border: PropTypes.string,
   onClick: PropTypes.func,
   children: PropTypes.string.isRequired,
 }

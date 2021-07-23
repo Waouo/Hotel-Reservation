@@ -2,7 +2,6 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
 } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap-grid.min.css'
 import { RoomsContext } from './contexts'
@@ -19,7 +18,7 @@ const App = () => {
     <>
       <RoomsContext.Provider value={{ rooms, success }}>
         <Router>
-          <Switch location={location} key={location.pathname}>
+          <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/room/:id" component={RoomPage} />
             <Route exact path="*" component={NotFoundPage} />

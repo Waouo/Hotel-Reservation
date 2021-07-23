@@ -25,11 +25,10 @@ const Carousel = ({ num, variable, setVariable, color }) => {
     return () => {
       clearInterval(timer)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [setVariable, variable, num])
 
   return (
-    <form className={cx('slideItems', color, { color: !!color })}>
+    <form className={cx('slideItems', color)}>
       {numArray.map((_, index) => (
         <label key={index} htmlFor={index} className={cx('slideItems-label')}>
           <input

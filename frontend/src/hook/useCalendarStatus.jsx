@@ -30,6 +30,7 @@ const useCalendarStatus = (booking) => {
       normalNights = 0,
       holidayNights = 0
 
+    // Compare string ex: 2021-8-10
     while (start.format(fmt) !== end.format(fmt)) {
       start = start.add(1, 'day')
       dateArr.push(start.format(fmt))

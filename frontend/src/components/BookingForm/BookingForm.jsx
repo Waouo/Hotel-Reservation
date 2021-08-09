@@ -24,7 +24,6 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [showStartCalendar, setShowStartCalendar] = useState(false)
   const [showEndCalendar, setShowEndCalendar] = useState(false)
-  
 
   let { id } = useParams()
 
@@ -138,20 +137,18 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
               <div className={cx('errorMessage')}></div>
               <CSSTransition
                 in={showStartCalendar}
-                classNames="animation-fade"
-                timeout={1000}
+                classNames="calender-fade"
+                timeout={300}
                 unmountOnExit
               >
-                <div className={cx('calendar')}>
-                  <Calendar
-                    minDate={tomorrow.toDate()}
-                    maxDate={tomorrow.add(89, 'day').toDate()}
-                    color="rgba(148, 156, 124, 0.8)"
-                    date={state[0].startDate}
-                    disabledDates={bookingArr}
-                    onChange={(item) => setStartDate(item)}
-                  ></Calendar>
-                </div>
+                <Calendar
+                  minDate={tomorrow.toDate()}
+                  maxDate={tomorrow.add(89, 'day').toDate()}
+                  color="rgba(148, 156, 124, 0.8)"
+                  date={state[0].startDate}
+                  disabledDates={bookingArr}
+                  onChange={(item) => setStartDate(item)}
+                ></Calendar>
               </CSSTransition>
             </div>
             <div style={{ position: 'relative' }}>
@@ -164,24 +161,20 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
                 {state[0].endDate && dayjs(state[0].endDate).format(fmt)}
               </button>
               <div className={cx('errorMessage')}></div>
-
               <CSSTransition
                 in={showEndCalendar}
-                classNames="animation-fade"
-                timeout={1000}
+                classNames="calender-fade"
+                timeout={300}
                 unmountOnExit
               >
-                <div className={cx('calendar', { display: showEndCalendar })}>
-                  <Calendar
-                    className={cx('calendar')}
-                    minDate={dayjs(state[0].startDate).add(1, 'day').toDate()}
-                    maxDate={tomorrow.add(89, 'day').toDate()}
-                    color="rgba(148, 156, 124, 0.8)"
-                    date={state[0].endDate}
-                    disabledDates={bookingArr}
-                    onChange={(item) => setEndDate(item)}
-                  ></Calendar>
-                </div>
+                <Calendar
+                  minDate={dayjs(state[0].startDate).add(1, 'day').toDate()}
+                  maxDate={tomorrow.add(89, 'day').toDate()}
+                  color="rgba(148, 156, 124, 0.8)"
+                  date={state[0].endDate}
+                  disabledDates={bookingArr}
+                  onChange={(item) => setEndDate(item)}
+                ></Calendar>
               </CSSTransition>
             </div>
             <div className={cx('day')}>

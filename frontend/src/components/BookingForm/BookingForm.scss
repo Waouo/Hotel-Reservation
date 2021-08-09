@@ -85,3 +85,32 @@
     }
   }
 }
+:global {
+  .rdrCalendarWrapper {
+    position: absolute;
+    z-index: 1;
+    border: 1px solid black;
+  }
+}
+
+$calenderFadeTime: 300ms;
+
+:global {
+  .calender-fade-enter {
+    opacity: 0;
+  }
+
+  .calender-fade-enter-active {
+    opacity: 1;
+    transition: opacity $calenderFadeTime linear;
+  }
+
+  .calender-fade-exit {
+    opacity: 1;
+  }
+
+  .calender-fade-exit-active {
+    opacity: 0;
+    transition: opacity $calenderFadeTime linear;
+  }
+}

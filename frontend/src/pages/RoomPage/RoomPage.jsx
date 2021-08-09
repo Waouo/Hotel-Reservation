@@ -55,19 +55,19 @@ const RoomPage = ({ match }) => {
           <CSSTransition
             in={showBooking}
             classNames="animation-fade"
-            timeout={1000}
+            timeout={500}
             unmountOnExit
           >
             <div className={cx('booking-page')}>
               <BookingPage />
             </div>
           </CSSTransition>
-          <div className={cx('room-page-container', 'row')}>
+npm           <div className={cx('room-page-container', 'row')}>
             <section className={cx('carousel-section', 'col-md-5', 'col-12')}>
               <TransitionGroup component={null}>
                 <CSSTransition
                   classNames="animation-fade"
-                  timeout={1000}
+                  timeout={500}
                   key={bgObj?.num}
                 >
                   <img

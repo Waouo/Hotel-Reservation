@@ -30,7 +30,7 @@
   }
 
   /* 增加/刪除清單時的入場/退場動畫 */
-  $fadeTransitionTime: 1000ms;
+  $fadeTransitionTime: 500ms;
 
   .animation-fade-enter {
     opacity: 0;

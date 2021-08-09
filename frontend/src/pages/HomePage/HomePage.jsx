@@ -20,7 +20,7 @@ const HomePage = () => {
       <TransitionGroup component={null}>
         <CSSTransition
           classNames="animation-fade"
-          timeout={1000}
+          timeout={500}
           key={bgObj?.num}
         >
           <img className={cx('bg-img')} src={bgObj?.src} />

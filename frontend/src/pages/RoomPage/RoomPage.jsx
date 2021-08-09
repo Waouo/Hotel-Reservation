@@ -8,7 +8,6 @@ import Amenities from '../../components/Amenities'
 import SubmitButton from '../../components/SubmitButton'
 import RoomSize from '../../components/RoomSize'
 import { BookingContext, RoomsContext } from '../../contexts'
-import useBackGround from '../../hook/useBackGround'
 import useGetRoomDetails from '../../hook/useGetRoomDetails'
 import useCalendarStatus from '../../hook/useCalendarStatus'
 import loadable from '@loadable/component'
@@ -20,11 +19,11 @@ const Calendar = loadable(() => import('../../components/Calendar'))
 const cx = classNames.bind(styles)
 
 const RoomPage = ({ match }) => {
+  const [imgSrc, setImgSrc] = useState('')
+
   //RoomsContext
   const { room, booking, des } = useGetRoomDetails(match.params.id)
   const [showBooking, setShowBooking] = useState(false)
-
-  const bgObj = useBackGround(room.imageUrl)
 
   //BookingContext
   const { dateArr, state, nightsObj, bookingArr, setState, tomorrow } =
@@ -62,17 +61,17 @@ const RoomPage = ({ match }) => {
               <BookingPage />
             </div>
           </CSSTransition>
-npm           <div className={cx('room-page-container', 'row')}>
+          <div className={cx('room-page-container', 'row')}>
             <section className={cx('carousel-section', 'col-md-5', 'col-12')}>
               <TransitionGroup component={null}>
                 <CSSTransition
                   classNames="animation-fade"
                   timeout={500}
-                  key={bgObj?.num}
+                  key={imgSrc}
                 >
                   <img
                     className={cx('bg-img')}
-                    src={bgObj?.src}
+                    src={imgSrc}
                     alt={'background-image'}
                   />
                 </CSSTransition>
@@ -93,9 +92,8 @@ npm           <div className={cx('room-page-container', 'row')}>
                   </a>
                 </div>
                 <Carousel
-                  num={3}
-                  variable={bgObj?.num}
-                  setVariable={bgObj?.setNum}
+                  imageUrl={room.imageUrl || []}
+                  setImgSrc={setImgSrc}
                   color={'light-green'}
                 />
               </div>

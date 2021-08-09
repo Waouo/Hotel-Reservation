@@ -1,31 +1,45 @@
 import PropTypes from 'prop-types'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './Carousel.scss'
 import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-const Carousel = ({ num, variable, setVariable, color }) => {
-  const numArray = Array(num)
+const Carousel = ({ imageUrl, setImgSrc, color }) => {
+  const [imgNum, setImgNum] = useState(0)
+  const buttonQty = imageUrl.length
+
+  const numArray = Array(imageUrl.length)
     .fill()
     .map((_, index) => index)
 
+  // Preload images
+  useEffect(() => {
+    if (imageUrl) {
+      imageUrl.forEach((imageUrl) => {
+        let img = new Image()
+        img.imgSrc = imageUrl
+        img.rel = 'preload'
+      })
+
+      setImgSrc(imageUrl[imgNum])
+    }
+  }, [imgNum, imageUrl, setImgSrc])
+
+  // Change image periodically
   useEffect(() => {
     let timer = setInterval(() => {
-      setVariable((e) => {
-        if (e < num - 1) {
-          setVariable(e + 1)
-        } else {
-          e = 0
-          setVariable(0)
-        }
-      })
+      if (imgNum < buttonQty - 1) {
+        setImgNum(imgNum + 1)
+      } else {
+        setImgNum(0)
+      }
     }, 10000)
 
     return () => {
       clearInterval(timer)
     }
-  }, [setVariable, variable, num])
+  }, [setImgNum, buttonQty, imgNum])
 
   return (
     <form className={cx('slideItems', color)}>
@@ -36,8 +50,8 @@ const Carousel = ({ num, variable, setVariable, color }) => {
             name="slideItem"
             id={index}
             value={index}
-            onChange={(e) => setVariable(Number(e.currentTarget.value))}
-            checked={variable === index}
+            onChange={(e) => setImgNum(Number(e.currentTarget.value))}
+            checked={imgNum === index}
             className={cx('slideItems-input')}
           />
           <span className={cx('slideItems-control')}></span>
@@ -48,9 +62,8 @@ const Carousel = ({ num, variable, setVariable, color }) => {
 }
 
 Carousel.propTypes = {
-  num: PropTypes.number.isRequired,
-  variable: PropTypes.number.isRequired,
-  setVariable: PropTypes.func.isRequired,
+  imageUrl: PropTypes.array.isRequired,
+  setImgSrc: PropTypes.func.isRequired,
   color: PropTypes.string,
 }
 

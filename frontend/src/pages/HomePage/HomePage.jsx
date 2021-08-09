@@ -5,25 +5,21 @@ import { CarouselContext } from '../../contexts'
 import bgImagesPath from './bgImagesPath'
 import Sidebar from '../../components/Sidebar'
 import Gallery from '../../components/Gallery'
-import useBackGround from '../../hook/useBackGround'
 import loadable from '@loadable/component'
+import { useState } from 'react'
 
 const Footer = loadable(() => import('../../components/Footer'))
 
 const cx = classNames.bind(styles)
 
 const HomePage = () => {
-  const bgObj = useBackGround(bgImagesPath)
+  const [imgSrc, setImgSrc] = useState('')
 
   return (
     <div className={cx('home')}>
       <TransitionGroup component={null}>
-        <CSSTransition
-          classNames="animation-fade"
-          timeout={500}
-          key={bgObj?.num}
-        >
-          <img className={cx('bg-img')} src={bgObj?.src} />
+        <CSSTransition classNames="animation-fade" timeout={500} key={imgSrc}>
+          <img className={cx('bg-img')} src={imgSrc} />
         </CSSTransition>
       </TransitionGroup>
 
@@ -32,9 +28,8 @@ const HomePage = () => {
         <Gallery />
         <CarouselContext.Provider
           value={{
-            num: 4,
-            variable: bgObj?.num,
-            setVariable: bgObj?.setNum,
+            imageUrl: bgImagesPath,
+            setImgSrc,
           }}
         >
           <Footer />

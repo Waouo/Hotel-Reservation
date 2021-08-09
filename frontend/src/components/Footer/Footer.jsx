@@ -7,11 +7,11 @@ import classNames from 'classnames/bind'
 const cx = classNames.bind(styles)
 
 const Footer = () => {
-  const { num, variable, setVariable } = useContext(CarouselContext)
+  const { imageUrl, setImgSrc } = useContext(CarouselContext)
 
   return (
     <footer>
-      <Carousel num={num} variable={variable} setVariable={setVariable} />
+      <Carousel imageUrl={imageUrl} setImgSrc={setImgSrc} />
       <span className={cx('copyright')}>
         <sup>&copy;</sup>GAO SHAO WEI
       </span>

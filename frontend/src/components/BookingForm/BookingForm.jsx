@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './BookingForm.scss'
 import validationSchema from './validationSchema'
 import { BookingContext } from '../../contexts'
@@ -26,7 +26,6 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
   const [showEndCalendar, setShowEndCalendar] = useState(false)
 
   let { id } = useParams()
-
   const {
     state,
     setState,
@@ -72,7 +71,6 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
           setIsLoading(true)
-          setIsError(false)
 
           const data = JSON.stringify({ ...values, date: dateArr })
 
@@ -83,7 +81,6 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
             setIsError(true)
           }
 
-          setIsLoading(false)
           setSubmitting(false)
         }}
       >

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import styles from './BookingPage.scss'
 import classNames from 'classnames/bind'
 import loadable from '@loadable/component'
@@ -19,13 +19,13 @@ const BookingPage = () => {
 
   const handleExit = () => {
     setShowBooking(false)
-
-    // Use setTimeout to prevent booking page show the form before page was closed
-    setTimeout(() => {
-      setIsSuccess(false)
-      setIsError(false)
-    }, 1000)
   }
+
+  // Reset then. Prevent booking page show the form before page was closed && memory leaks
+  useEffect(() => {
+    setIsSuccess(false)
+    setIsError(false)
+  }, [])
 
   return (
     <div className={cx('booking-container', 'row')}>
@@ -77,7 +77,9 @@ const BookingPage = () => {
                 </div>
                 <p className={cx('flow-chart-des')}>送出線上預約單</p>
               </div>
-              <img src={require("../../../public/images/flow-chart-arrow.svg")} />
+              <img
+                src={require('../../../public/images/flow-chart-arrow.svg')}
+              />
               <div className={cx('flow-chart-item', 'arrow')}>
                 <div className={cx('flow-chart-icon-bg')}>
                   <img src={require('../../../public/images/search.svg')} />

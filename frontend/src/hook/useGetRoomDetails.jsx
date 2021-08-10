@@ -3,7 +3,7 @@ import { getRoomDetailsApi } from '../Api/room'
 
 const useGetRoomDetails = (matchParamsId) => {
   const [room, setRoom] = useState({})
-  const [booking, setBooking] = useState([])
+  const [bookedDates, setBookedDates] = useState([])
   const [des, setDes] = useState({})
   const [success, setSuccess] = useState(false)
 
@@ -14,7 +14,7 @@ const useGetRoomDetails = (matchParamsId) => {
         const { data } = await getRoomDetailsApi(matchParamsId)
         setRoom(data.room[0])
         setDes(data.room[0].descriptionShort)
-        setBooking(data.booking)
+        setBookedDates(data.booking)
         setSuccess(data.success)
       } catch (error) {
         console.error(`Something went wrong: ${error.message}`)
@@ -25,7 +25,7 @@ const useGetRoomDetails = (matchParamsId) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return { room, booking, des, success }
+  return { room, bookedDates, des, success }
 }
 
 export default useGetRoomDetails

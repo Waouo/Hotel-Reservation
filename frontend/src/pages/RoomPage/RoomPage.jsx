@@ -22,12 +22,12 @@ const RoomPage = ({ match }) => {
   const [imgSrc, setImgSrc] = useState('')
 
   //RoomsContext
-  const { room, booking, des } = useGetRoomDetails(match.params.id)
+  const { room, bookedDates, des } = useGetRoomDetails(match.params.id)
   const [showBooking, setShowBooking] = useState(false)
 
   //BookingContext
-  const { dateArr, state, nightsObj, bookingArr, setState, tomorrow } =
-    useCalendarStatus(booking)
+  const { selectedDates, state, nightsObj, disableDates, setState, tomorrow } =
+    useCalendarStatus(bookedDates)
   const [totalPrice, setTotalPrice] = useState(0)
 
   useEffect(() => {
@@ -44,8 +44,8 @@ const RoomPage = ({ match }) => {
         setState,
         tomorrow,
         nightsObj,
-        bookingArr,
-        dateArr,
+        disableDates,
+        selectedDates,
         totalPrice,
       }}
     >

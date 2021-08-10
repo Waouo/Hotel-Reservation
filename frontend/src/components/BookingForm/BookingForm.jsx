@@ -31,8 +31,8 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
     setState,
     tomorrow,
     nightsObj,
-    bookingArr,
-    dateArr,
+    disabledDates,
+    selectedDates,
     totalPrice,
   } = useContext(BookingContext)
 
@@ -72,7 +72,7 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
         onSubmit={async (values, { setSubmitting }) => {
           setIsLoading(true)
 
-          const data = JSON.stringify({ ...values, date: dateArr })
+          const data = JSON.stringify({ ...values, date: selectedDates })
 
           try {
             await reservedRoomApi(id, data)
@@ -143,7 +143,7 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
                   maxDate={tomorrow.add(89, 'day').toDate()}
                   color="rgba(148, 156, 124, 0.8)"
                   date={state[0].startDate}
-                  disabledDates={bookingArr}
+                  disabledDates={disabledDates}
                   onChange={(item) => setStartDate(item)}
                 ></Calendar>
               </CSSTransition>
@@ -169,7 +169,7 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
                   maxDate={tomorrow.add(89, 'day').toDate()}
                   color="rgba(148, 156, 124, 0.8)"
                   date={state[0].endDate}
-                  disabledDates={bookingArr}
+                  disabledDates={disabledDates}
                   onChange={(item) => setEndDate(item)}
                 ></Calendar>
               </CSSTransition>

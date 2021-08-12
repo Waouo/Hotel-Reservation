@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 const useCalendarStatus = (booking) => {
   const fmt = 'YYYY-MM-DD'
-  const tomorrow = dayjs().startOf('day').add(1, 'day')
+  let tomorrow = dayjs().startOf('day').add(1, 'day')
 
   const [selectedDates, setSelectedDates] = useState([])
   const [weekArr, setWeekArr] = useState({})
@@ -18,7 +18,7 @@ const useCalendarStatus = (booking) => {
     },
   ])
 
-  const disableDates = booking
+  const disabledDates = booking
     ? booking.map((x) => dayjs(x['date']).toDate())
     : []
 
@@ -81,7 +81,7 @@ const useCalendarStatus = (booking) => {
     weekArr,
     state,
     nightsObj,
-    disableDates,
+    disabledDates,
     setState,
     tomorrow,
   }

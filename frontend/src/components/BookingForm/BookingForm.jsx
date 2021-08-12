@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from './BookingForm.scss'
 import validationSchema from './validationSchema'
 import { BookingContext } from '../../contexts'
@@ -36,6 +36,7 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
     totalPrice,
   } = useContext(BookingContext)
 
+  console.log(disabledDates)
   const setStartDate = (item) => {
     if (dayjs(item).isSameOrAfter(dayjs(state[0].endDate), 'day')) {
       setState([{ startDate: item, endDate: item }])

@@ -9,14 +9,14 @@ import 'react-date-range/dist/theme/default.css' // theme css file
 const cx = classNames.bind(styles)
 
 const Calendar = () => {
-  const { state, setState, disableDates, tomorrow } = useContext(BookingContext)
+  const { state, setState, disabledDates, tomorrow } = useContext(BookingContext)
   
   return (
     <>
       {state && (
         <DateRange
           className={cx('calendar')}
-          disabledDates={disableDates}
+          disabledDates={disabledDates}
           displayMode={'dateRange'}
           showDateDisplay={false}
           showMonthAndYearPickers={false}

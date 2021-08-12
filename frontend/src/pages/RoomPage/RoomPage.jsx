@@ -26,7 +26,7 @@ const RoomPage = ({ match }) => {
   const [showBooking, setShowBooking] = useState(false)
 
   //BookingContext
-  const { selectedDates, state, nightsObj, disableDates, setState, tomorrow } =
+  const { selectedDates, state, nightsObj, disabledDates, setState, tomorrow } =
     useCalendarStatus(bookedDates)
   const [totalPrice, setTotalPrice] = useState(0)
 
@@ -44,7 +44,7 @@ const RoomPage = ({ match }) => {
         setState,
         tomorrow,
         nightsObj,
-        disableDates,
+        disabledDates,
         selectedDates,
         totalPrice,
       }}

@@ -75,22 +75,9 @@
 }
 
 .calendar {
-  position: relative;
-
-  :global {
-    .rdrCalendarWrapper {
-      position: absolute;
-      z-index: 1;
-      border: 1px solid black;
-    }
-  }
-}
-:global {
-  .rdrCalendarWrapper {
-    position: absolute;
-    z-index: 1;
-    border: 1px solid black;
-  }
+  position: absolute;
+  z-index: 1;
+  border: 1px solid black;
 }
 
 $calenderFadeTime: 300ms;

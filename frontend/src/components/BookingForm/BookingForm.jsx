@@ -139,6 +139,7 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
                 unmountOnExit
               >
                 <Calendar
+                  className={cx('calendar')}
                   minDate={tomorrow.toDate()}
                   maxDate={tomorrow.add(89, 'day').toDate()}
                   color="rgba(148, 156, 124, 0.8)"
@@ -165,6 +166,7 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
                 unmountOnExit
               >
                 <Calendar
+                  className={cx('calendar')}
                   minDate={dayjs(state[0].startDate).toDate()}
                   maxDate={tomorrow.add(89, 'day').toDate()}
                   color="rgba(148, 156, 124, 0.8)"

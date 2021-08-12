@@ -38,7 +38,7 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
 
   const setStartDate = (item) => {
     if (dayjs(item).isSameOrAfter(dayjs(state[0].endDate), 'day')) {
-      setState([{ startDate: item, endDate: item }])
+      setState([{ ...state[0], startDate: item, endDate: item }])
     } else {
       setState([{ ...state[0], startDate: item }])
     }

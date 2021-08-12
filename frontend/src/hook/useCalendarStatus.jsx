@@ -22,6 +22,32 @@ const useCalendarStatus = (booking) => {
     ? booking.map((x) => dayjs(x['date']).toDate())
     : []
 
+  // Check the default selected date whether is booked date
+  useEffect(() => {
+    const bookMap = {}
+    let defaultSelectedDate = dayjs().startOf('day').add(1, 'day')
+
+    booking.forEach((booking) => {
+      if (!bookMap[booking['date']]) {
+        bookMap[booking['date']] = 1
+      }
+    })
+
+    while (bookMap[defaultSelectedDate.format(fmt)]) {
+      defaultSelectedDate = defaultSelectedDate.add(1, 'day')
+    }
+
+    setState([
+      {
+        startDate: defaultSelectedDate.toDate(),
+        endDate: defaultSelectedDate.toDate(),
+        key: 'selection',
+        isPickingStartDate: false,
+        isPickingEndDate: false,
+      },
+    ])
+  }, [booking])
+
   useEffect(() => {
     let start = dayjs(state[0].startDate),
       end = dayjs(state[0].endDate),
@@ -48,7 +74,7 @@ const useCalendarStatus = (booking) => {
     setSelectedDates(selectedDates)
     setWeekArr(weekArr)
     setNights({ normal: normalNights, holiday: holidayNights })
-  }, [state, setNights])
+  }, [setNights, state])
 
   return {
     selectedDates,

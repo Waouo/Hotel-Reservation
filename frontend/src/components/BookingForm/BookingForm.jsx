@@ -36,7 +36,6 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
     totalPrice,
   } = useContext(BookingContext)
 
-  console.log(disabledDates)
   const setStartDate = (item) => {
     if (dayjs(item).isSameOrAfter(dayjs(state[0].endDate), 'day')) {
       setState([{ startDate: item, endDate: item }])
@@ -166,7 +165,7 @@ const BookingForm = ({ setIsSuccess, setIsError }) => {
                 unmountOnExit
               >
                 <Calendar
-                  minDate={dayjs(state[0].startDate).add(1, 'day').toDate()}
+                  minDate={dayjs(state[0].startDate).toDate()}
                   maxDate={tomorrow.add(89, 'day').toDate()}
                   color="rgba(148, 156, 124, 0.8)"
                   date={state[0].endDate}

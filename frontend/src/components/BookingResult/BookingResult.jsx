@@ -11,7 +11,7 @@ const BookingResult = ({ result }) => {
         <>
           <img
             className={cx('booking-result-img')}
-            src={'../../.././public/images/success.svg'}
+            src={require('../../.././public/images/success.svg')}
           />
           <h1 className={cx('booking-result-title')}>預約成功</h1>
           <p className={cx('booking-result-desc')}>
@@ -26,7 +26,7 @@ const BookingResult = ({ result }) => {
         <>
           <img
             className={cx('booking-result-img')}
-            src={'../../.././public/images/error.svg'}
+            src={require('../../.././public/images/error.svg')}
           />
           <h1 className={cx('booking-result-title')}>預約失敗</h1>
           <p className={cx('booking-result-desc')}>

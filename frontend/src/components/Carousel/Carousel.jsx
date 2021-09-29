@@ -17,9 +17,9 @@ const Carousel = ({ imageUrl, setImgSrc, color }) => {
   useEffect(() => {
     if (imageUrl) {
       imageUrl.forEach((imageUrl) => {
-        let img = new Image()
-        img.imgSrc = imageUrl
-        img.rel = 'preload'
+        let image  = document.createElement('img')
+        image.src = imageUrl
+        image.rel = 'preload'
       })
 
       setImgSrc(imageUrl[imgNum])

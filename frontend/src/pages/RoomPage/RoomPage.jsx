@@ -15,11 +15,13 @@ import loadable from '@loadable/component'
 const BookingPage = loadable(() => import('../BookingPage'))
 const Carousel = loadable(() => import('../../components/Carousel'))
 const Calendar = loadable(() => import('../../components/Calendar'))
+const ImageSlider = loadable(() => import('../../components/ImageSlider'))
 
 const cx = classNames.bind(styles)
 
 const RoomPage = ({ match }) => {
   const [imgSrc, setImgSrc] = useState('')
+  const [showSlider, setShowSlider] = useState(false)
 
   //RoomsContext
   const { room, bookedDates, des } = useGetRoomDetails(match.params.id)
@@ -36,6 +38,10 @@ const RoomPage = ({ match }) => {
         room.holidayPrice * nightsObj.holiday
     )
   }, [nightsObj, room])
+
+  function handleShowSlider() {
+    setShowSlider(true)
+  }
 
   return (
     <BookingContext.Provider
@@ -61,6 +67,11 @@ const RoomPage = ({ match }) => {
               <BookingPage />
             </div>
           </CSSTransition>
+          <ImageSlider
+            imageUrl={room?.imageUrl}
+            showSlider={showSlider}
+            setShowSlider={setShowSlider}
+          />
           <div className={cx('room-page-container', 'row')}>
             <section className={cx('carousel-section', 'col-md-5', 'col-12')}>
               <TransitionGroup component={null}>
@@ -73,6 +84,7 @@ const RoomPage = ({ match }) => {
                     className={cx('bg-img')}
                     src={imgSrc}
                     alt={'background-image'}
+                    onClick={handleShowSlider}
                   />
                 </CSSTransition>
               </TransitionGroup>

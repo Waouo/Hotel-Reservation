@@ -1,0 +1,48 @@
+.picture-slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-img {
+    width: 70%;
+    height: 80vh;
+    margin: 0 20px;
+  }
+
+  @media (max-width: 763px), screen {
+    height: 768px;
+
+    &-img {
+      margin: 0 5px;
+    }
+  }
+}
+
+.picture-slider-img,
+.last-img-btn,
+.next-img-btn {
+  position: relative;
+}
+
+.last-img-btn,
+.next-img-btn {
+  color: white;
+  background-color: black;
+  opacity: 0.5;
+  font-size: 4em;
+  border: none;
+
+  &:hover {
+    opacity: 1;
+    transition: all 0.3;
+  }
+}
+
+.display-none {
+  display: none;
+}

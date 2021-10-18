@@ -13,7 +13,7 @@
     width: 100%;
   }
 }
-.carousel-section{
+.carousel-section {
   min-height: 768px;
   position: relative;
   z-index: 0;
@@ -23,6 +23,7 @@
   order: 1;
 
   &::after {
+    pointer-events: none;
     @include after_cover(
       linear-gradient(180deg, #ffffff00 0%, #ffffff 100%) no-repeat
     );
@@ -36,6 +37,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  cursor: pointer;
 }
 
 .prePage {

@@ -45,7 +45,7 @@ const ImageSlider = ({ imageUrl, showSlider, setShowSlider }) => {
         className={cx('picture-slider', { 'display-none': !showSlider })}
         onClick={handleExit}
       >
-        <button className={cx('last-img-btn')} onClick={handleLastImage}>
+        <button className={cx('img-btn')} onClick={handleLastImage}>
           &lt;
         </button>
         <img
@@ -53,7 +53,7 @@ const ImageSlider = ({ imageUrl, showSlider, setShowSlider }) => {
           src={imageSrc}
           alt="room-image"
         />
-        <button className={cx('next-img-btn')} onClick={handleNextImage}>
+        <button className={cx('img-btn')} onClick={handleNextImage}>
           &gt;
         </button>
       </div>

@@ -8,7 +8,6 @@ const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const PreloadWebpackPlugin = require('preload-webpack-plugin')
 const webpack = require('webpack')
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 
 module.exports = {
   mode: 'development',
@@ -93,9 +92,7 @@ module.exports = {
     new PreloadWebpackPlugin(),
     new CleanWebpackPlugin(),
     new Dotenv({ path: '../.env' }),
-    //分析網頁使用資料大小
     new webpack.HotModuleReplacementPlugin(),
-    new WebpackManifestPlugin(),
     // new BundleAnalyzerPlugin(),
   ],
   devServer: {

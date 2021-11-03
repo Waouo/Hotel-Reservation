@@ -11,11 +11,11 @@ import { BookingContext, RoomsContext } from '../../contexts'
 import useGetRoomDetails from '../../hook/useGetRoomDetails'
 import useCalendarStatus from '../../hook/useCalendarStatus'
 import loadable from '@loadable/component'
+import ImageSlider from '../../components/ImageSlider'
 
 const BookingPage = loadable(() => import('../BookingPage'))
 const Carousel = loadable(() => import('../../components/Carousel'))
 const Calendar = loadable(() => import('../../components/Calendar'))
-const ImageSlider = loadable(() => import('../../components/ImageSlider'))
 
 const cx = classNames.bind(styles)
 
@@ -38,10 +38,6 @@ const RoomPage = ({ match }) => {
         room.holidayPrice * nightsObj.holiday
     )
   }, [nightsObj, room])
-
-  function handleShowSlider() {
-    setShowSlider(true)
-  }
 
   return (
     <BookingContext.Provider
@@ -67,11 +63,18 @@ const RoomPage = ({ match }) => {
               <BookingPage />
             </div>
           </CSSTransition>
-          <ImageSlider
-            imageUrl={room?.imageUrl}
-            showSlider={showSlider}
-            setShowSlider={setShowSlider}
-          />
+          <CSSTransition
+            in={showSlider}
+            classNames="animation-fade"
+            timeout={500}
+            unmountOnExit
+          >
+              <ImageSlider
+                imageUrl={room?.imageUrl}
+                setShowSlider={setShowSlider}
+              />
+          </CSSTransition>
+
           <div className={cx('room-page-container', 'row')}>
             <section className={cx('carousel-section', 'col-md-5', 'col-12')}>
               <TransitionGroup component={null}>
@@ -84,7 +87,9 @@ const RoomPage = ({ match }) => {
                     className={cx('bg-img')}
                     src={imgSrc}
                     alt={'background-image'}
-                    onClick={handleShowSlider}
+                    onClick={() => {
+                      setShowSlider(true)
+                    }}
                   />
                 </CSSTransition>
               </TransitionGroup>

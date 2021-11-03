@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 const cx = classNames.bind(styles)
 
-const ImageSlider = ({ imageUrl, showSlider, setShowSlider }) => {
+const ImageSlider = ({ imageUrl, setShowSlider }) => {
   const [imageSrc, setImgSrc] = useState('')
   const [imageNum, setImageNum] = useState(0)
 
@@ -40,16 +40,15 @@ const ImageSlider = ({ imageUrl, showSlider, setShowSlider }) => {
   }
 
   return (
-    <>
       <div
-        className={cx('picture-slider', { 'display-none': !showSlider })}
+        className={cx('image-slider')}
         onClick={handleExit}
       >
         <button className={cx('img-btn')} onClick={handleLastImage}>
           &lt;
         </button>
         <img
-          className={cx('picture-slider-img')}
+          className={cx('image-slider-img')}
           src={imageSrc}
           alt="room-image"
         />
@@ -57,13 +56,11 @@ const ImageSlider = ({ imageUrl, showSlider, setShowSlider }) => {
           &gt;
         </button>
       </div>
-    </>
   )
 }
 
 ImageSlider.propTypes = {
   imageUrl: PropTypes.array.isRequired,
-  showSlider: PropTypes.bool.isRequired,
   setShowSlider: PropTypes.func.isRequired,
 }
 

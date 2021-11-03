@@ -1,4 +1,4 @@
-.picture-slider {
+.image-slider {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -23,7 +23,7 @@
   }
 }
 
-.picture-slider-img,
+.image-slider-img,
 .img-btn {
   position: relative;
 }
@@ -39,8 +39,4 @@
     opacity: 1;
     transition: all 0.3;
   }
-}
-
-.display-none {
-  display: none;
 }

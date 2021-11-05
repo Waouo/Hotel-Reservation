@@ -73,9 +73,13 @@ const RoomPage = ({ match }) => {
               setShowSlider={setShowSlider}
             />
           </CSSTransition>
-
           <div className={cx('room-page-container', 'row')}>
-            <section className={cx('carousel-section', 'col-md-5', 'col-12')}>
+            <section
+              className={cx('carousel-section', 'col-md-5', 'col-12')}
+              onClick={(e) => {
+                console.log(e.target)
+              }}
+            >
               <Link to="/" className={cx('prePage')}>
                 <span className={cx('arrow')}> &lt; </span>查看其它房型
               </Link>
@@ -97,6 +101,7 @@ const RoomPage = ({ match }) => {
                 color={'light-green'}
                 imageClassName={'room-page-img'}
                 pauseFunction={true}
+                setShowSlider={setShowSlider}
               />
             </section>
             <main className={cx('room', ' col-md-7', 'col-12')}>

@@ -6,7 +6,13 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 const cx = classNames.bind(styles)
 
-const Carousel = ({ imageUrl, color, imageClassName, pauseFunction }) => {
+const Carousel = ({
+  imageUrl,
+  color,
+  imageClassName,
+  pauseFunction,
+  setShowSlider,
+}) => {
   const [imgSrc, setImgSrc] = useState('')
   const [imgNum, setImgNum] = useState(0)
   const buttonQty = imageUrl.length
@@ -46,34 +52,47 @@ const Carousel = ({ imageUrl, color, imageClassName, pauseFunction }) => {
     }
   }, [setImgNum, buttonQty, imgNum, pauseFunction, paused])
 
+  const handleImageSlider = (e) => {
+    // e.target.classList = ['carousel_xxxxx', value: 'carousel_xxxxx']
+    const targetClass = e.target.classList[0].split('_')[0]
+    if (setShowSlider && targetClass === 'carousel') {
+      setShowSlider(true)
+    }
+  }
+
   return (
     <div
-      className={cx('carousel')}
+      className={cx('carousel', { pointer: !!setShowSlider })}
       onMouseEnter={() => {
         setPaused(true)
       }}
       onMouseLeave={() => {
         setPaused(false)
       }}
+      onClick={handleImageSlider}
     >
       <TransitionGroup component={null}>
         <CSSTransition classNames="animation-fade" timeout={500} key={imgSrc}>
           <img className={cx(imageClassName)} src={imgSrc} />
         </CSSTransition>
       </TransitionGroup>
-      <div className={cx('slideItems', color)}>
+      <div className={cx('carousel-items', color)}>
         {numArray.map((_, index) => (
-          <label key={index} htmlFor={index} className={cx('slideItems-label')}>
+          <label
+            key={index}
+            htmlFor={index}
+            className={cx('carousel-items-label')}
+          >
             <input
               type="radio"
-              name="slideItem"
+              name="carousel-items"
               id={index}
               value={index}
               onChange={(e) => setImgNum(Number(e.currentTarget.value))}
               checked={imgNum === index}
-              className={cx('slideItems-input')}
+              className={cx('carousel-items-input')}
             />
-            <span className={cx('slideItems-control')}></span>
+            <span className={cx('carousel-items-control')}></span>
           </label>
         ))}
       </div>
@@ -86,6 +105,7 @@ Carousel.propTypes = {
   color: PropTypes.string,
   imageClassName: PropTypes.string,
   pauseFunction: PropTypes.bool,
+  setShowSlider: PropTypes.func,
 }
 
 export default Carousel

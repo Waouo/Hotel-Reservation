@@ -6,10 +6,11 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 const cx = classNames.bind(styles)
 
-const Carousel = ({ imageUrl, color, imageClassName, pause }) => {
+const Carousel = ({ imageUrl, color, imageClassName, pauseFunction }) => {
   const [imgSrc, setImgSrc] = useState('')
   const [imgNum, setImgNum] = useState(0)
   const buttonQty = imageUrl.length
+  const [paused, setPaused] = useState(false)
 
   const numArray = Array(imageUrl.length)
     .fill()
@@ -31,20 +32,30 @@ const Carousel = ({ imageUrl, color, imageClassName, pause }) => {
   // Change image periodically
   useEffect(() => {
     let timer = setInterval(() => {
-      if (imgNum < buttonQty - 1) {
-        setImgNum(imgNum + 1)
-      } else {
-        setImgNum(0)
+      if (pauseFunction && !paused) {
+        if (imgNum < buttonQty - 1) {
+          setImgNum(imgNum + 1)
+        } else {
+          setImgNum(0)
+        }
       }
     }, 10000)
 
     return () => {
       clearInterval(timer)
     }
-  }, [setImgNum, buttonQty, imgNum])
+  }, [setImgNum, buttonQty, imgNum, pauseFunction, paused])
 
   return (
-    <div className={cx('carousel')}>
+    <div
+      className={cx('carousel')}
+      onMouseEnter={() => {
+        setPaused(true)
+      }}
+      onMouseLeave={() => {
+        setPaused(false)
+      }}
+    >
       <TransitionGroup component={null}>
         <CSSTransition classNames="animation-fade" timeout={500} key={imgSrc}>
           <img className={cx(imageClassName)} src={imgSrc} />
@@ -74,7 +85,7 @@ Carousel.propTypes = {
   imageUrl: PropTypes.array.isRequired,
   color: PropTypes.string,
   imageClassName: PropTypes.string,
-  pause: PropTypes.bool,
+  pauseFunction: PropTypes.bool,
 }
 
 export default Carousel

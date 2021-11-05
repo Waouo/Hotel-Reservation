@@ -1,26 +1,25 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group'
 import classNames from 'classnames/bind'
 import styles from './RoomPage.scss'
 import PropTypes from 'prop-types'
 import Amenities from '../../components/Amenities'
 import SubmitButton from '../../components/SubmitButton'
 import RoomSize from '../../components/RoomSize'
+import Carousel from '../../components/Carousel'
+import ImageSlider from '../../components/ImageSlider'
+import loadable from '@loadable/component'
 import { BookingContext, RoomsContext } from '../../contexts'
 import useGetRoomDetails from '../../hook/useGetRoomDetails'
 import useCalendarStatus from '../../hook/useCalendarStatus'
-import loadable from '@loadable/component'
-import ImageSlider from '../../components/ImageSlider'
 
 const BookingPage = loadable(() => import('../BookingPage'))
-const Carousel = loadable(() => import('../../components/Carousel'))
 const Calendar = loadable(() => import('../../components/Calendar'))
 
 const cx = classNames.bind(styles)
 
 const RoomPage = ({ match }) => {
-  const [imgSrc, setImgSrc] = useState('')
   const [showSlider, setShowSlider] = useState(false)
 
   //RoomsContext
@@ -69,30 +68,14 @@ const RoomPage = ({ match }) => {
             timeout={500}
             unmountOnExit
           >
-              <ImageSlider
-                imageUrl={room?.imageUrl}
-                setShowSlider={setShowSlider}
-              />
+            <ImageSlider
+              imageUrl={room?.imageUrl}
+              setShowSlider={setShowSlider}
+            />
           </CSSTransition>
 
           <div className={cx('room-page-container', 'row')}>
             <section className={cx('carousel-section', 'col-md-5', 'col-12')}>
-              <TransitionGroup component={null}>
-                <CSSTransition
-                  classNames="animation-fade"
-                  timeout={500}
-                  key={imgSrc}
-                >
-                  <img
-                    className={cx('bg-img')}
-                    src={imgSrc}
-                    alt={'background-image'}
-                    onClick={() => {
-                      setShowSlider(true)
-                    }}
-                  />
-                </CSSTransition>
-              </TransitionGroup>
               <Link to="/" className={cx('prePage')}>
                 <span className={cx('arrow')}> &lt; </span>查看其它房型
               </Link>
@@ -108,12 +91,12 @@ const RoomPage = ({ match }) => {
                     </SubmitButton>
                   </a>
                 </div>
-                <Carousel
-                  imageUrl={room.imageUrl || []}
-                  setImgSrc={setImgSrc}
-                  color={'light-green'}
-                />
               </div>
+              <Carousel
+                imageUrl={room.imageUrl || []}
+                color={'light-green'}
+                imageClassName={'room-page-img'}
+              />
             </section>
             <main className={cx('room', ' col-md-7', 'col-12')}>
               <div className={cx('room-container')}>

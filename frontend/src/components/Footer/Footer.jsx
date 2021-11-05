@@ -1,17 +1,17 @@
-import { useContext } from 'react'
 import Carousel from '../Carousel'
-import { CarouselContext } from '../../contexts'
 import styles from './Footer.scss'
 import classNames from 'classnames/bind'
+import bgImagesPath from './bgImagesPath'
 
 const cx = classNames.bind(styles)
 
 const Footer = () => {
-  const { imageUrl, setImgSrc } = useContext(CarouselContext)
-
   return (
     <footer>
-      <Carousel imageUrl={imageUrl} setImgSrc={setImgSrc} />
+      <Carousel
+        imageUrl={bgImagesPath}
+        imageClassName={'home-page-img'}
+      />
       <span className={cx('copyright')}>
         <sup>&copy;</sup>GAO SHAO WEI
       </span>

@@ -1,6 +1,15 @@
-.slideItems {
+.carousel,.slideItems {
   display: flex;
   justify-content: center;
+}
+
+.carousel {
+  width: 100%;
+  align-items: end;
+  padding-bottom: 20px;
+}
+
+.slideItems {
   align-items: center;
   opacity: 0.6;
 
@@ -29,4 +38,23 @@
 
 .light-green {
   --color: #38470b;
+}
+
+.home-page-img, .room-page-img {
+  width: 100%;
+  z-index: -2;
+  top: 0;
+  left: 0;
+}
+
+.home-page-img {
+  height: 100vh;
+  min-width: 576px;
+  position: fixed;
+}
+
+.room-page-img {
+  height: 100%;
+  position: absolute;
+  cursor: pointer;
 }

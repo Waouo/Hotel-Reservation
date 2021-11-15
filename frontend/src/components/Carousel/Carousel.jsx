@@ -6,13 +6,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 const cx = classNames.bind(styles)
 
-const Carousel = ({
-  imageUrl,
-  color,
-  imageClassName,
-  pauseFunction,
-  setShowSlider,
-}) => {
+const Carousel = ({ imageUrl, color, imageClassName, setShowSlider }) => {
   const [imgSrc, setImgSrc] = useState('')
   const [imgNum, setImgNum] = useState(0)
   const buttonQty = imageUrl.length
@@ -37,11 +31,11 @@ const Carousel = ({
   // Change image periodically
   useEffect(() => {
     let timer = setInterval(() => {
-        if (imgNum < buttonQty - 1) {
-          setImgNum(imgNum + 1)
-        } else {
-          setImgNum(0)
-        }
+      if (imgNum < buttonQty - 1) {
+        setImgNum(imgNum + 1)
+      } else {
+        setImgNum(0)
+      }
     }, 10000)
 
     return () => {
@@ -60,12 +54,6 @@ const Carousel = ({
   return (
     <div
       className={cx('carousel', { pointer: !!setShowSlider })}
-      onMouseEnter={() => {
-        setPaused(true)
-      }}
-      onMouseLeave={() => {
-        setPaused(false)
-      }}
       onClick={handleImageSlider}
     >
       <TransitionGroup component={null}>

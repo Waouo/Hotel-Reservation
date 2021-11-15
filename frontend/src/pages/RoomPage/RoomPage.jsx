@@ -100,7 +100,6 @@ const RoomPage = ({ match }) => {
                 imageUrl={room.imageUrl || []}
                 color={'light-green'}
                 imageClassName={'room-page-img'}
-                pauseFunction={true}
                 setShowSlider={setShowSlider}
               />
             </section>

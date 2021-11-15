@@ -16,7 +16,6 @@ const Carousel = ({
   const [imgSrc, setImgSrc] = useState('')
   const [imgNum, setImgNum] = useState(0)
   const buttonQty = imageUrl.length
-  const [paused, setPaused] = useState(false)
 
   const numArray = Array(imageUrl.length)
     .fill()
@@ -38,19 +37,17 @@ const Carousel = ({
   // Change image periodically
   useEffect(() => {
     let timer = setInterval(() => {
-      if (pauseFunction && !paused) {
         if (imgNum < buttonQty - 1) {
           setImgNum(imgNum + 1)
         } else {
           setImgNum(0)
         }
-      }
     }, 10000)
 
     return () => {
       clearInterval(timer)
     }
-  }, [setImgNum, buttonQty, imgNum, pauseFunction, paused])
+  }, [setImgNum, buttonQty, imgNum])
 
   const handleImageSlider = (e) => {
     // e.target.classList = ['carousel_xxxxx', value: 'carousel_xxxxx']
@@ -104,7 +101,6 @@ Carousel.propTypes = {
   imageUrl: PropTypes.array.isRequired,
   color: PropTypes.string,
   imageClassName: PropTypes.string,
-  pauseFunction: PropTypes.bool,
   setShowSlider: PropTypes.func,
 }
 
